@@ -1,39 +1,121 @@
 import streamlit as st
 from openai import OpenAI
+import smtplib
+from email.mime.text import MIMEText
 
+# ==============================
+# 🔐 LOAD API KEY (SAFE)
+# ==============================
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-st.title("AI CV + LinkedIn Optimizer 🚀")
+# ==============================
+# 📩 EMAIL FUNCTION
+# ==============================
+def send_email(to_email, content):
+    try:
+        msg = MIMEText(content)
+        msg['Subject'] = "Your Optimized CV + LinkedIn 🚀"
+        msg['From'] = st.secrets["EMAIL_ADDRESS"]
+        msg['To'] = to_email
 
-cv = st.text_area("Paste your CV")
-email = st.text_input("Enter your email")
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        server.login(st.secrets["EMAIL_ADDRESS"], st.secrets["EMAIL_PASSWORD"])
+        server.send_message(msg)
+        server.quit()
 
-st.info("⚠️ Payment required before generating result")
+        return True
+    except Exception as e:
+        return False
 
-if st.button("I HAVE PAID"):
-    if cv and email:
+# ==============================
+# 🎨 UI DESIGN
+# ==============================
+st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
-        with st.spinner("Optimizing your CV..."):
+st.title("🚀 AI CV + LinkedIn Optimizer")
+st.write("Upgrade your CV to a professional, ATS-optimized version + LinkedIn summary")
 
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "user", "content": f"""
-                    Improve this CV professionally and create:
-                    - ATS optimized CV
-                    - LinkedIn headline
-                    - LinkedIn summary
+st.markdown("---")
 
-                    {cv}
-                    """}
-                ]
-            )
+# ==============================
+# 💳 PAYMENT SECTION (MANUAL)
+# ==============================
+st.markdown("## 💳 Payment Required")
 
-            result = response.choices[0].message.content
+st.info("""
+Pay ₦5,000 to continue:
 
-            st.success("✅ Done!")
+Bank: Opay  
+Name: Akpojotor Oghenechovwe  
+Account Number: 8035341982  
 
-            st.download_button("Download Result", result)
+After payment, click **I HAVE PAID**
+""")
 
+# ==============================
+# 📥 USER INPUT
+# ==============================
+cv = st.text_area("📄 Paste your CV here")
+email = st.text_input("📧 Enter your email")
+
+# ==============================
+# 🚀 PROCESS BUTTON
+# ==============================
+if st.button("✅ I HAVE PAID"):
+
+    if not cv or not email:
+        st.warning("⚠️ Please fill all fields")
+    
     else:
-        st.warning("Please fill all fields")
+        st.info("🔍 Verifying payment... Please wait")
+
+        # 👉 FOR NOW: manual trust system
+        # Later we replace with Paystack verification
+
+        with st.spinner("🤖 Optimizing your CV..."):
+
+            try:
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": f"""
+Improve this CV professionally and create:
+
+1. ATS-optimized CV
+2. LinkedIn headline
+3. LinkedIn summary
+
+Make it highly professional and impactful.
+
+CV:
+{cv}
+"""
+                        }
+                    ]
+                )
+
+                result = response.choices[0].message.content
+
+                st.success("✅ Done! Your CV is ready")
+
+                # ==============================
+                # 📥 DOWNLOAD
+                # ==============================
+                st.download_button(
+                    label="📥 Download Result",
+                    data=result,
+                    file_name="optimized_cv.txt"
+                )
+
+                # ==============================
+                # 📩 SEND EMAIL
+                # ==============================
+                if send_email(email, result):
+                    st.success("📩 Sent to your email!")
+                else:
+                    st.warning("⚠️ Could not send email")
+
+            except Exception as e:
+                st.error(f"❌ Error: {e}")

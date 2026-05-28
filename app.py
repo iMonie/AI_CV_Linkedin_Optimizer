@@ -103,9 +103,6 @@ CV:
 
                 st.success("✅ Done! Your CV is ready")
                 
-                st.markdown("## 💳 Get Full CV + LinkedIn Optimization")
-st.markdown("[Pay ₦5,000 here](https://paystack.com/pay/YOUR-LINK)")
-
 
                 # ==============================
                 # 📥 DOWNLOAD

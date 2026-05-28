@@ -33,7 +33,7 @@ def send_email(to_email, content):
 st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
 st.title("🚀 AI CV + LinkedIn Optimizer")
-st.write("Upgrade your CV to a professional, ATS-optimized version + LinkedIn summary")
+st.write("Upgrade your CV to a professional, ATS-optimized version + LinkedIn Professional Profile Summary")
 
 st.markdown("---")
 
@@ -43,7 +43,7 @@ st.markdown("---")
 st.markdown("## 💳 Payment Required")
 
 st.info("""
-Pay ₦5,000 to continue:
+Pay a token of ₦1,000 to continue:
 
 Bank: Opay  
 Name: Akpojotor Oghenechovwe  

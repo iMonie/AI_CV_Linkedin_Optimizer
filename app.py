@@ -81,13 +81,16 @@ if st.button("✅ I HAVE PAID"):
                         {
                             "role": "user",
                             "content": f"""
-Improve this CV professionally and create:
+You are an expert recruiter and career strategist.
 
-1. ATS-optimized CV
-2. LinkedIn headline
-3. LinkedIn summary
-
-Make it highly professional and impactful.
+1. Optimize this CV for ATS systems and recruiter visibility.
+2. Rewrite it to be results-driven, quantified, and impactful.
+3. Suggest improvements for structure and keywords.
+4. Create a strong LinkedIn profile including:
+   - Headline
+   - About section
+   - Key skills
+   - Experience bullet improvements
 
 CV:
 {cv}

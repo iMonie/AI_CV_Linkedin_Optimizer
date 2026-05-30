@@ -118,18 +118,6 @@ st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired X10 faster.")
 
 st.markdown("---")
 
-# ==============================
-# ⏳ COUNTDOWN TIMER
-# ==============================
-if "end_time" not in st.session_state:
-    st.session_state.end_time = datetime.now() + timedelta(minutes=10)
-
-remaining = st.session_state.end_time - datetime.now()
-minutes, seconds = divmod(remaining.seconds, 60)
-
-st.markdown(f"⏳ **Limited Offer Ends In: {minutes:02d}:{seconds:02d}**")
-
-st.markdown("---")
 
 # ==============================
 # 💬 TESTIMONIALS
@@ -306,4 +294,4 @@ else:
 # FOOTER
 # ==============================
 st.markdown("---")
-st.caption("🚀 AI-powered career growth tool designed by Oghenechovwe AKPOJOTOR")
+st.caption("🚀 AI-powered career growth tool - designed by Oghenechovwe AKPOJOTOR")

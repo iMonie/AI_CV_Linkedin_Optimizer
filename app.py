@@ -4,7 +4,7 @@ import smtplib
 from email.mime.text import MIMEText
 
 # ==============================
-# 🔐 LOAD API KEY (SAFE)
+# 🔐 LOAD API KEY
 # ==============================
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -14,7 +14,7 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 def send_email(to_email, content):
     try:
         msg = MIMEText(content)
-        msg['Subject'] = "Your Optimized CV + LinkedIn 🚀"
+        msg['Subject'] = "🚀 Your AI Optimized CV + LinkedIn"
         msg['From'] = st.secrets["EMAIL_ADDRESS"]
         msg['To'] = to_email
 
@@ -24,33 +24,56 @@ def send_email(to_email, content):
         server.quit()
 
         return True
-    except Exception as e:
+    except:
         return False
 
 # ==============================
-# 🎨 UI DESIGN
+# 🎨 UI
 # ==============================
-st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
+st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
 
 st.title("🚀 AI CV + LinkedIn Optimizer")
-st.write("Upgrade your CV to a professional, ATS-optimized version + LinkedIn Professional Profile Summary")
+st.write("Get a recruiter-level CV + LinkedIn makeover that gets you hired faster.")
 
 st.markdown("---")
 
 # ==============================
-# 💳 PAYMENT SECTION (MANUAL)
+# 💳 PAYMENT OPTIONS
 # ==============================
-st.markdown("## 💳 Payment Required")
+st.markdown("## 💳 Choose Your Package")
 
-st.info("""
-Pay a token of ₦1,000 to continue:
+col1, col2 = st.columns(2)
 
-Bank: Opay  
-Name: Akpojotor Oghenechovwe  
-Account Number: 8035341982  
-
-After payment, click **I HAVE PAID**
+with col1:
+    st.subheader("💼 Basic - ₦0 (FREE)")
+    st.write("""
+✔ ATS Optimized CV  
+✔ Improved bullet points  
+✔ Cleaner formatting  
 """)
+    st.link_button("Pay for Basic", "https://selar.co/11180kb0j4")
+
+with col2:
+    st.subheader("💎 Premium - ₦3,000")
+    st.write("""
+🔥 EVERYTHING in Basic PLUS:
+
+✔ LinkedIn Headline  
+✔ LinkedIn About Section  
+✔ Keyword Optimization  
+✔ Recruiter-Level Rewrite  
+✔ Strong Achievement Metrics  
+✔ Job-winning positioning  
+""")
+    st.link_button("Go Premium 🚀", "https://selar.co/m001q0082z")
+
+st.markdown("---")
+
+# ==============================
+# 🔍 CHECK PLAN
+# ==============================
+query_params = st.query_params
+plan = query_params.get("plan")
 
 # ==============================
 # 📥 USER INPUT
@@ -59,67 +82,81 @@ cv = st.text_area("📄 Paste your CV here")
 email = st.text_input("📧 Enter your email")
 
 # ==============================
-# 🚀 PROCESS BUTTON
+# 🚀 MAIN LOGIC
 # ==============================
-if st.button("✅ I HAVE PAID"):
+if plan in ["basic", "premium"]:
 
-    if not cv or not email:
-        st.warning("⚠️ Please fill all fields")
-    
-    else:
-        st.info("🔍 Verifying payment... Please wait")
+    if plan == "basic":
+        st.success("✅ Basic Plan Activated")
 
-        # 👉 FOR NOW: manual trust system
-        # Later we replace with Paystack verification
+        # 🔥 UPSELL
+        st.warning("🚀 Want 10x better results? Upgrade to Premium for LinkedIn + recruiter-level rewrite!")
+        st.link_button("Upgrade to Premium", "https://https://selar.co/m001q0082z")
 
-        with st.spinner("🤖 Optimizing your CV..."):
+    elif plan == "premium":
+        st.success("💎 Premium Plan Activated — Full Access Unlocked!")
 
-            try:
-                response = client.chat.completions.create(
-                    model="gpt-4o-mini",
-                    messages=[
-                        {
-                            "role": "user",
-                            "content": f"""
-You are an expert recruiter and career strategist.
+    if cv and email:
 
-1. Optimize this CV for ATS systems and recruiter visibility.
-2. Rewrite it to be results-driven, quantified, and impactful.
-3. Suggest improvements for structure and keywords.
-4. Create a strong LinkedIn profile including:
-   - Headline
-   - About section
-   - Key skills
-   - Experience bullet improvements
+        if st.button("🚀 Generate My Optimized CV"):
+
+            with st.spinner("Optimizing your CV..."):
+
+                # ==============================
+                # 🤖 DIFFERENT AI PROMPTS
+                # ==============================
+                if plan == "basic":
+                    prompt = f"""
+Improve this CV professionally:
+- Make it ATS friendly
+- Improve bullet points
+- Clean formatting
 
 CV:
 {cv}
 """
-                        }
-                    ]
+
+                else:  # PREMIUM
+                    prompt = f"""
+You are an expert recruiter and career strategist.
+
+1. Rewrite this CV to be highly competitive
+2. Make it results-driven with strong metrics
+3. Optimize for ATS and recruiter psychology
+4. Create:
+   - LinkedIn Headline
+   - LinkedIn About Section
+   - Key Skills Section
+5. Position candidate as top 1%
+
+CV:
+{cv}
+"""
+
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[{"role": "user", "content": prompt}]
                 )
 
                 result = response.choices[0].message.content
 
-                st.success("✅ Done! Your CV is ready")
-                
+                st.success("🎉 Your CV is ready!")
 
-                # ==============================
-                # 📥 DOWNLOAD
-                # ==============================
+                # DOWNLOAD
                 st.download_button(
-                    label="📥 Download Result",
-                    data=result,
+                    "📥 Download Result",
+                    result,
                     file_name="optimized_cv.txt"
                 )
 
-                # ==============================
-                # 📩 SEND EMAIL
-                # ==============================
+                # EMAIL
                 if send_email(email, result):
                     st.success("📩 Sent to your email!")
                 else:
-                    st.warning("⚠️ Could not send email")
+                    st.warning("⚠️ Email failed")
 
-            except Exception as e:
-                st.error(f"❌ Error: {e}")
+    else:
+        st.info("Fill your CV + email to proceed")
+
+else:
+    st.error("❌ Please complete payment to unlock access")

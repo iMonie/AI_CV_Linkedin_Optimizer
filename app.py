@@ -64,6 +64,7 @@ with col2:
 ✔ Recruiter-Level Rewrite  
 ✔ Strong Achievement Metrics  
 ✔ Job-winning positioning 
+
 ✔ Cover Letter
 """)
     st.link_button("Go Premium 🚀", "https://selar.co/m001q0082z")

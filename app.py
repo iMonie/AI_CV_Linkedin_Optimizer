@@ -54,7 +54,7 @@ with col1:
     st.link_button("Pay for Basic", "https://selar.co/11180kb0j4")
 
 with col2:
-    st.subheader("💎 Premium - ₦3,000")
+    st.subheader("💎 Premium - ₦0")
     st.write("""
 🔥 EVERYTHING in Basic PLUS:
 

@@ -6,23 +6,23 @@ import time
 import random
 
 # ==============================
-# 🎨 CUSTOM DARK UI
+# 🎨 CUSTOM LIGHT UI (UPDATED)
 # ==============================
 st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
 
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(135deg, #0a192f, #020c1b);
-    color: white;
+    background: white;
+    color: black;
 }
 h1, h2, h3, h4, p {
-    color: white !important;
+    color: black !important;
     font-weight: bold;
 }
 textarea, input {
-    background-color: #112240 !important;
-    color: white !important;
+    background-color: #f5f5f5 !important;
+    color: black !important;
     border-radius: 10px;
 }
 .stButton>button {
@@ -72,7 +72,7 @@ st.markdown(f"🔥 **{live_users} people are using this right now**")
 # 🎯 HEADER
 # ==============================
 st.title("🚀 AI CV + LinkedIn Optimizer")
-st.write("🔥 Beat 95% of applicants. Get hired faster.")
+st.write("🔥 Beat 99% of applicants. Get hired faster.")
 
 st.markdown("---")
 
@@ -102,7 +102,7 @@ st.markdown("## 💳 Choose Your Package")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("### 💼 Basic (Free)")
+    st.markdown("### 💼 Basic  (Free)")
     st.write("""
 ✔ ATS Optimized CV  
 ✔ Better bullet points  
@@ -111,7 +111,7 @@ with col1:
     st.link_button("Start Free", "https://selar.co/11180kb0j4")
 
 with col2:
-    st.markdown("### 💎 Premium (LIMITED OFFER)")
+    st.markdown("### 💎 Premium #3000 (LIMITED OFFER)")
     st.write("""
 🔥 EVERYTHING in Basic PLUS:
 
@@ -155,11 +155,11 @@ if plan in ["basic", "premium"]:
         st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
 
     else:
-        st.success("💎 Premium Activated")
+        st.success("**💎 Premium Activated**")
 
     if cv and email:
 
-        if st.button("🚀 Generate My CV"):
+        if st.button("**🚀 Generate My CV**"):
 
             # ==============================
             # ⚡ ANIMATED LOADING
@@ -242,4 +242,4 @@ else:
 # FOOTER
 # ==============================
 st.markdown("---")
-st.caption("🚀 AI-powered career growth tool")
+st.caption("🚀 AI-powered career growth tool - Designed By Oghenechovwe AKPOJOTOR")

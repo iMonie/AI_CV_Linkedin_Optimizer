@@ -63,8 +63,8 @@ with col2:
 ✔ Skills & Keyword Optimization  
 ✔ Recruiter-Level Rewrite  
 ✔ Strong Achievement Metrics  
+✔ Job-winning positioning 
 ✔ Cover Letter
-✔ Job-winning positioning  
 """)
     st.link_button("Go Premium 🚀", "https://selar.co/m001q0082z")
 

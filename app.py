@@ -124,7 +124,7 @@ with col1:
 with col2:
     st.markdown('<div class="premium-card">', unsafe_allow_html=True)
     st.markdown("### 💎 Premium")
-    st.markdown("~~₦10,000~~ **₦1,000 Today**")
+    st.markdown("~~$10~~ **$1 Today**")
     st.write("✔ LinkedIn Optimization\n✔ Achievements\n✔ Cover Letter\n✔ Recruiter Rewrite")
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z?plan=premium")
     st.markdown('</div>', unsafe_allow_html=True)
@@ -217,12 +217,12 @@ CV:
             st.markdown("## 🚀 Want Recruiters to FIND You?")
             st.info("Top candidates don’t just apply… they show up DAILY.")
 
-            st.link_button("Start Growing", "YOUR_AFFILIATE_LINK")
+            st.link_button("Start Growing on Linkedin", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
 
             # ==============================
             # 📲 WHATSAPP FUNNEL
             # ==============================
-            st.markdown("## 💬 Get Personal Help")
+            st.markdown("## 💬 Get Personalized Help")
 
             msg = urllib.parse.quote(
                 "Hi, I used your AI CV tool. I want help getting hired fast."
@@ -230,22 +230,22 @@ CV:
 
             st.link_button(
                 "Chat on WhatsApp",
-                f"https://wa.me/YOUR_NUMBER?text={msg}"
+                f"https://wa.me/2348035341982?text={msg}"
             )
 
             # ==============================
-            # 💰 ₦50K OFFER
+            # 💰 $5 OFFER
             # ==============================
             st.markdown("## 💎 Want GUARANTEED Results?")
-            st.warning("₦50,000 Career Acceleration Package")
+            st.warning("$5 Career Acceleration Package")
 
             premium_msg = urllib.parse.quote(
-                "I want the 50k career acceleration package"
+                "I want the $5 career acceleration package"
             )
 
             st.link_button(
                 "Secure Your Spot",
-                f"https://wa.me/YOUR_NUMBER?text={premium_msg}"
+                f"https://wa.me/2348035341982?text={premium_msg}"
             )
 
             # ==============================
@@ -256,7 +256,7 @@ CV:
 
             st.success(f"""
 Your referral link:
-{ref_link}
+{ref_Link}
 
 Referrals: {st.session_state.ref_count}
 """)

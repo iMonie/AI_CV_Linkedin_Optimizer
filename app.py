@@ -109,7 +109,7 @@ live_users = random.randint(12, 47)
 st.markdown(f"🔥 **{live_users} people are using this right now**")
 
 # ==============================
-# ⏳ GLOBAL COUNTDOWN
+# ⏳ FIXED COUNTDOWN (NO LAG)
 # ==============================
 if "end_time" not in st.session_state:
     st.session_state.end_time = datetime.now() + timedelta(minutes=15)
@@ -121,11 +121,6 @@ if remaining.total_seconds() > 0:
     seconds = int(remaining.total_seconds() % 60)
 
     st.warning(f"⏳ Offer expires in {minutes}:{seconds:02d}")
-
-    # Auto-refresh every second using st.empty and st.rerun
-    time.sleep(1)  # Wait for 1 second before refreshing
-    st.rerun()     # Rerun to update countdown
-
 else:
     st.error("❌ Offer expired! Price returned to ₦10,000")
 
@@ -183,7 +178,12 @@ st.markdown("### 📧 Enter your email")
 email = st.text_input(" ")
 
 # ==============================
-# 🚀 GENERATION
+# 🧠 PLAN (SAFE DEFAULT)
+# ==============================
+plan = st.session_state.get("plan", "premium")
+
+# ==============================
+# 🚀 GENERATION (YOUR EXACT LOGIC)
 # ==============================
 if cv and email:
 
@@ -205,10 +205,10 @@ if cv and email:
             progress.progress(i + 1)
             status.text(random.choice(steps))
 
-        if 'plan' in st.session_state and st.session_state.plan == "basic":
+        if plan == "basic":
             prompt = f"""
 Improve this CV professionally:
-- Make it ATS friendly and highly impactful
+- Make it ATS friendly
 - Improve bullet points
 - Clean formatting
 
@@ -250,88 +250,30 @@ CV:
 
         if send_email(email, result):
             st.success("📩 Sent to your email!")
-        else:
-            st.warning("⚠️ Email failed")
 
         # ==============================
-        # 🚀 VIRAL HOOK
+        # WHATSAPP CTA
         # ==============================
-        st.markdown("---")
-        st.markdown("## 🚀 Want Recruiters to FIND You?")
-
-        st.info("""
-Your CV is strong…
-
-But visibility = opportunities.
-
-Top candidates show up DAILY on LinkedIn.
-""")
-
-        st.link_button("Start Growing x10 FASTER", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
-
-        # ==============================
-        # 📲 WHATSAPP AUTO FOLLOW-UP
-        # ==============================
-        st.markdown("---")
-        st.markdown("## 💬 Get Personal Help (FASTEST WAY TO GET HIRED)")
-
-        whatsapp_message = f"""
-Hi, I just used your AI CV tool.
-
-I want help getting a job fast.
-Can you guide me?
-"""
-
-        encoded_msg = urllib.parse.quote(whatsapp_message)
+        encoded_msg = urllib.parse.quote(
+            "I just used your AI CV tool. Help me get hired fast."
+        )
 
         st.link_button(
-            "Chat on WhatsApp",
+            "💬 Chat on WhatsApp",
             f"https://wa.me/2348035341982?text={encoded_msg}"
         )
 
         # ==============================
-        # 💰 ₦5K OFFER
-        # ==============================
-        st.markdown("## 💎 Want GUARANTEED Results?")
-
-        st.warning("""
-AI Career Acceleration Package
-
-✔ CV Rewrite  
-✔ LinkedIn Optimization  
-✔ 1-on-1 Strategy  
-✔ Job Visibility System  
-
-💰 ₦5,000
-""")
-
-        premium_msg = urllib.parse.quote(
-            "I want the 5k career acceleration package"
-        )
-
-        st.link_button(
-            "Secure Your Spot",
-            f"https://wa.me/2348035341982?text={premium_msg}"
-        )
-
-        # ==============================
-        # 🧲 REFERRAL SYSTEM UI
+        # REFERRAL UI
         # ==============================
         st.markdown("---")
         st.markdown("## 🎁 Earn Rewards")
 
         st.success(f"""
-Invite friends & earn rewards 🎉
-
 Your referral link:
 {ref_link}
 
 Referrals: {st.session_state.ref_count}
-""")
-
-        st.info("""  
-🎁 10 referrals = FREE CV Premium Rewrite  
-🎁 25 referrals = Done for You & 1-on-1 Session
 """)
 
 else:

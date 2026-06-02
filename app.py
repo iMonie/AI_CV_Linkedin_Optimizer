@@ -81,9 +81,26 @@ ref_link = f"https://yourapp.streamlit.app/?ref={user_id}"
 # ==============================
 st.markdown(f"🔥 **{random.randint(15,50)} people are using this right now**")
 
-end_time = datetime.now() + timedelta(minutes=15)
-remaining = end_time - datetime.now()
-st.warning(f"⏳ Offer expires in {remaining.seconds//60} minutes")
+# ==============================
+# ⏳ REAL DYNAMIC COUNTDOWN
+# ==============================
+if "end_time" not in st.session_state:
+    st.session_state.end_time = datetime.now() + timedelta(minutes=15)
+
+remaining = st.session_state.end_time - datetime.now()
+
+if remaining.total_seconds() > 0:
+    minutes = int(remaining.total_seconds() // 60)
+    seconds = int(remaining.total_seconds() % 60)
+
+    st.warning(f"⏳ Offer expires in {minutes}:{seconds:02d}")
+
+    # Auto-refresh every second
+    time.sleep(1)
+    st.rerun()
+
+else:
+    st.error("❌ Offer expired! Price returned to ₦10,000")
 
 # ==============================
 # 🎯 HEADER

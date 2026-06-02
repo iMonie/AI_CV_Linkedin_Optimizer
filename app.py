@@ -124,7 +124,7 @@ with col1:
 with col2:
     st.markdown('<div class="premium-card">', unsafe_allow_html=True)
     st.markdown("### 💎 Premium")
-    st.markdown("~~10$~~ **2$ Today**")
+    st.markdown("~~₦10,000~~ **₦1,000 Today**")
     st.write("✔ LinkedIn Optimization\n✔ Achievements\n✔ Cover Letter\n✔ Recruiter Rewrite")
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z?plan=premium")
     st.markdown('</div>', unsafe_allow_html=True)
@@ -234,13 +234,13 @@ CV:
             )
 
             # ==============================
-            # 💰 5$ OFFER
+            # 💰 ₦5K OFFER
             # ==============================
             st.markdown("## 💎 Want GUARANTEED Results?")
-            st.warning("5$ Career Acceleration Package")
+            st.warning("₦5,000 Career Acceleration Package")
 
             premium_msg = urllib.parse.quote(
-                "I want the 5$ career acceleration package"
+                "I want the ₦5,000 career acceleration package"
             )
 
             st.link_button(

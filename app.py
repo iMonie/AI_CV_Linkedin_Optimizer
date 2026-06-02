@@ -271,7 +271,7 @@ I am ready to take action.
             )
 
             # ==============================
-            # 💰 ₦10K OFFER (ENHANCED POSITIONING)
+            # 💰 ₦5K OFFER (ENHANCED POSITIONING)
             # ==============================
             st.markdown("## 💎 Want GUARANTEED Results?")
 
@@ -283,11 +283,11 @@ I am ready to take action.
 ✔ 1-on-1 strategy session  
 ✔ Visibility system  
 
-💰 ₦10,000
+💰 ₦5,000
 """)
 
             premium_msg = urllib.parse.quote(
-                "I want the 10k career acceleration package"
+                "I want the 5k career acceleration package"
             )
 
             st.link_button(

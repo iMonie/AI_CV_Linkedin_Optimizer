@@ -89,7 +89,7 @@ st.warning(f"⏳ Offer expires in {remaining.seconds//60} minutes")
 # 🎯 HEADER
 # ==============================
 st.title("🚀 AI CV + LinkedIn Optimizer")
-st.write("🔥 Beat 99% of applicants. Get hired X10 faster.")
+st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired X10 faster.")
 
 st.markdown("---")
 
@@ -276,4 +276,4 @@ else:
 # FOOTER
 # ==============================
 st.markdown("---")
-st.caption("🚀 Built for income + impact")
+st.caption("🚀 Built for income & impact by Oghenechovwe AKPOJOTOR")

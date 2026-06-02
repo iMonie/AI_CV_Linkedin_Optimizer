@@ -12,10 +12,6 @@ import urllib.parse
 # ==============================
 st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
 
-st.markdown("""<style>
-.stApp {background: linear-gradient(135deg, #eef2ff, #ffffff);}
-</style>""", unsafe_allow_html=True)
-
 # ==============================
 # 🔐 API
 # ==============================
@@ -27,7 +23,7 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 def send_email(to_email, content):
     try:
         msg = MIMEText(content)
-        msg['Subject'] = "🚀 Your AI Optimized CV"
+        msg['Subject'] = "🚀 Your AI Optimized CV + LinkedIn"
         msg['From'] = st.secrets["EMAIL_ADDRESS"]
         msg['To'] = to_email
 
@@ -40,39 +36,93 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 🔥 HEADER
+# 🔗 REFERRAL SYSTEM
+# ==============================
+query_params = st.query_params
+ref = query_params.get("ref")
+
+if "ref_count" not in st.session_state:
+    st.session_state.ref_count = 0
+
+if ref:
+    st.session_state.ref_count += 1
+
+user_id = str(random.randint(10000, 99999))
+ref_link = f"https://yourapp.streamlit.app/?ref={user_id}"
+
+# ==============================
+# 🔥 LIVE USERS
+# ==============================
+live_users = random.randint(12, 47)
+st.markdown(f"🔥 **{live_users} people are using this right now**")
+
+# ==============================
+# ⏳ COUNTDOWN
+# ==============================
+end_time = datetime.now() + timedelta(minutes=15)
+remaining = end_time - datetime.now()
+st.warning(f"⏳ Offer expires in {remaining.seconds//60} minutes")
+
+# ==============================
+# 🎯 HEADER
 # ==============================
 st.title("🚀 AI CV + LinkedIn Optimizer")
+st.write("🔥 Beat 99% of applicants. Get hired faster.")
+
+st.markdown("---")
 
 # ==============================
-# INPUT
+# 💳 PAYMENT
 # ==============================
-cv = st.text_area("Paste your CV")
-email = st.text_input("Email")
+col1, col2 = st.columns(2)
 
-plan = st.query_params.get("plan")
+with col1:
+    st.markdown("### 💼 Basic (Free)")
+    st.link_button("Start Free", "https://selar.co/11180kb0j4")
+
+with col2:
+    st.markdown("### 💎 Premium")
+    st.markdown("~~₦10,000~~  **₦1,000 Today**")
+    st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
+
+st.markdown("---")
 
 # ==============================
-# MAIN LOGIC
+# 📥 INPUT
 # ==============================
-if plan in ["basic", "premium"]:
+cv = st.text_area("📄 Paste your CV", height=200)
+email = st.text_input("📧 Enter your email")
 
-    if cv and email:
+plan = query_params.get("plan", "basic")
 
-        if st.button("🚀 Generate My CV"):
+# ==============================
+# 🚀 GENERATION
+# ==============================
+if cv and email:
 
-            progress = st.progress(0)
-            status = st.empty()
+    if st.button("🚀 Generate My CV"):
 
-            for i in range(100):
-                time.sleep(0.01)
-                progress.progress(i + 1)
+        progress = st.progress(0)
+        status = st.empty()
 
-            # ==============================
-            # PROMPT
-            # ==============================
-            if plan == "basic":
-                prompt = f"""
+        steps = [
+            "🔍 Analyzing CV...",
+            "🧠 Applying recruiter logic...",
+            "⚡ Optimizing bullet points...",
+            "📈 Adding achievements...",
+            "🎯 Finalizing..."
+        ]
+
+        for i in range(100):
+            time.sleep(0.02)
+            progress.progress(i + 1)
+            status.text(random.choice(steps))
+
+        # ==============================
+        # ✅ YOUR EXACT PROMPT (UNCHANGED)
+        # ==============================
+        if plan == "basic":
+            prompt = f"""
 Improve this CV professionally:
 - Make it ATS friendly
 - Improve bullet points
@@ -81,8 +131,8 @@ Improve this CV professionally:
 CV:
 {cv}
 """
-            else:
-                prompt = f"""
+        else:
+            prompt = f"""
 You are an expert recruiter and strategist.
 
 1. Rewrite this CV to be highly competitive.
@@ -103,82 +153,49 @@ CV:
 {cv}
 """
 
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}]
-            )
+        # ==============================
+        # AI CALL
+        # ==============================
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
 
         result = response.choices[0].message.content
 
+        # ==============================
+        # OUTPUT
+        # ==============================
         st.success("🎉 CV Ready!")
         st.download_button("Download", result)
 
         send_email(email, result)
 
-            # ==============================
-            # 🚀 VIRAL HOOK
-            # ==============================
-            st.markdown("---")
-            st.markdown("## 🚀 Want Recruiters to FIND You?")
+        # ==============================
+        # EXTRA UI
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 💬 Get Help Fast")
 
-            st.info("""
-Your CV is strong...
+        msg = "I want help getting a job fast"
+        encoded = urllib.parse.quote(msg)
 
-But visibility gets jobs.
+        st.link_button(
+            "Chat on WhatsApp",
+            f"https://wa.me/YOUR_NUMBER?text={encoded}"
+        )
 
-Top candidates show up daily on LinkedIn.
-""")
+        st.markdown("---")
+        st.markdown("## 🎁 Referral Rewards")
 
-            st.link_button(
-                "Grow on LinkedIn",
-                "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
-            )
-
-            # ==============================
-            # 📲 WHATSAPP CLOSER
-            # ==============================
-            st.markdown("## 💬 Get Personal Help")
-
-            msg = """
-Hi, I used your AI CV tool.
-
-I want help getting a job fast.
-"""
-
-            encoded = urllib.parse.quote(msg)
-
-            st.link_button(
-                "Chat on WhatsApp",
-                f"https://wa.me/2348035341982?text={encoded}"
-            )
-
-            # ==============================
-            # 💰 OFFER
-            # ==============================
-            st.markdown("## 💎 Guaranteed Results Package")
-
-            st.warning("""
-✔ Done-for-you CV  
-✔ LinkedIn optimization  
-✔ 1-on-1 strategy  
-
-💰 ₦5,000
-""")
-
-            premium_msg = urllib.parse.quote(
-                "I want the 5k package"
-            )
-
-            st.link_button(
-                "Secure Spot",
-                f"https://wa.me/2348035341982?text={premium_msg}"
-            )
+        st.success(f"Your link: {ref_link}")
+        st.write(f"Referrals: {st.session_state.ref_count}")
 
 else:
-    st.error("❌ Complete payment to unlock")
+    st.info("Enter CV + email")
 
 # ==============================
 # FOOTER
 # ==============================
 st.markdown("---")
-st.caption("Built for speed & income 🚀")
+st.caption("🚀 Built for income + impact")

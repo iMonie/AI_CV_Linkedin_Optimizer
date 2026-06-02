@@ -88,7 +88,7 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 🔗 REFERRAL SYSTEM
+# 🔗 REFERRAL SYSTEM (LOGIC)
 # ==============================
 query_params = st.query_params
 ref = query_params.get("ref")
@@ -119,7 +119,6 @@ remaining = st.session_state.end_time - datetime.now()
 if remaining.total_seconds() > 0:
     minutes = int(remaining.total_seconds() // 60)
     seconds = int(remaining.total_seconds() % 60)
-
     st.warning(f"⏳ Offer expires in {minutes}:{seconds:02d}")
 else:
     st.error("❌ Offer expired! Price returned to ₦10,000")
@@ -178,12 +177,12 @@ st.markdown("### 📧 Enter your email")
 email = st.text_input(" ")
 
 # ==============================
-# 🧠 PLAN (SAFE DEFAULT)
+# 🧠 PLAN SAFE DEFAULT
 # ==============================
 plan = st.session_state.get("plan", "premium")
 
 # ==============================
-# 🚀 GENERATION (YOUR EXACT LOGIC)
+# 🚀 GENERATION
 # ==============================
 if cv and email:
 
@@ -252,7 +251,23 @@ CV:
             st.success("📩 Sent to your email!")
 
         # ==============================
-        # WHATSAPP CTA
+        # 🚀 VIRAL HOOK
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 🚀 Want Recruiters to FIND You?")
+
+        st.info("""
+Your CV is strong…
+
+But visibility = opportunities.
+
+Top candidates show up DAILY on LinkedIn.
+""")
+
+        st.link_button("Start Growing x10 FASTER", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
+
+        # ==============================
+        # 📲 WHATSAPP
         # ==============================
         encoded_msg = urllib.parse.quote(
             "I just used your AI CV tool. Help me get hired fast."
@@ -264,16 +279,23 @@ CV:
         )
 
         # ==============================
-        # REFERRAL UI
+        # 🧲 REFERRAL SYSTEM UI
         # ==============================
         st.markdown("---")
         st.markdown("## 🎁 Earn Rewards")
 
         st.success(f"""
+Invite friends & earn rewards 🎉
+
 Your referral link:
 {ref_link}
 
 Referrals: {st.session_state.ref_count}
+""")
+
+        st.info(""" 
+🎁 10 referrals = FREE CV Premium Rewrite & Linkedin Optimization 
+🎁 25 referrals = Done for You & 1-on-1 Session
 """)
 
 else:

@@ -93,36 +93,31 @@ st.markdown("---")
 cv = st.text_area("📄 Paste your CV", height=200)
 email = st.text_input("📧 Enter your email")
 
-plan = query_params.get("plan", "basic")
-
 # ==============================
 # 🚀 GENERATION
 # ==============================
-if cv and email:
+    if cv and email:
 
-    if st.button("🚀 Generate My CV"):
+        if st.button("**🚀 Generate My CV**"):
 
-        progress = st.progress(0)
-        status = st.empty()
+            progress = st.progress(0)
+            status = st.empty()
 
-        steps = [
-            "🔍 Analyzing CV...",
-            "🧠 Applying recruiter logic...",
-            "⚡ Optimizing bullet points...",
-            "📈 Adding achievements...",
-            "🎯 Finalizing..."
-        ]
+            steps = [
+                "🔍 Analyzing CV...",
+                "🧠 Applying recruiter logic...",
+                "⚡ Optimizing bullet points...",
+                "📈 Adding achievements...",
+                "🎯 Finalizing..."
+            ]
 
-        for i in range(100):
-            time.sleep(0.02)
-            progress.progress(i + 1)
-            status.text(random.choice(steps))
+            for i in range(100):
+                time.sleep(0.02)
+                progress.progress(i + 1)
+                status.text(random.choice(steps))
 
-        # ==============================
-        # ✅ YOUR EXACT PROMPT (UNCHANGED)
-        # ==============================
-        if plan == "basic":
-            prompt = f"""
+            if plan == "basic":
+                prompt = f"""
 Improve this CV professionally:
 - Make it ATS friendly
 - Improve bullet points
@@ -131,8 +126,8 @@ Improve this CV professionally:
 CV:
 {cv}
 """
-        else:
-            prompt = f"""
+            else:
+                prompt = f"""
 You are an expert recruiter and strategist.
 
 1. Rewrite this CV to be highly competitive.
@@ -153,43 +148,99 @@ CV:
 {cv}
 """
 
-        # ==============================
-        # AI CALL
-        # ==============================
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
-        )
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}]
+            )
 
         result = response.choices[0].message.content
 
-        # ==============================
-        # OUTPUT
-        # ==============================
         st.success("🎉 CV Ready!")
         st.download_button("Download", result)
 
         send_email(email, result)
 
         # ==============================
-        # EXTRA UI
+        # 🚀 VIRAL HOOK
         # ==============================
         st.markdown("---")
-        st.markdown("## 💬 Get Help Fast")
+        st.markdown("## 🚀 Want Recruiters to FIND You?")
 
-        msg = "I want help getting a job fast"
-        encoded = urllib.parse.quote(msg)
+        st.info("""
+Your CV is strong…
+
+But visibility = opportunities.
+
+Top candidates show up DAILY on LinkedIn.
+""")
+
+        st.link_button("Start Growing", "YOUR_AFFILIATE_LINK")
+
+        # ==============================
+        # 📲 WHATSAPP AUTO FOLLOW-UP
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 💬 Get Personal Help (FASTEST WAY TO GET HIRED)")
+
+        whatsapp_message = f"""
+Hi, I just used your AI CV tool.
+
+I want help getting a job fast.
+Can you guide me?
+"""
+
+        encoded_msg = urllib.parse.quote(whatsapp_message)
 
         st.link_button(
             "Chat on WhatsApp",
-            f"https://wa.me/YOUR_NUMBER?text={encoded}"
+            f"https://wa.me/YOUR_NUMBER?text={encoded_msg}"
         )
 
-        st.markdown("---")
-        st.markdown("## 🎁 Referral Rewards")
+        # ==============================
+        # 💰 ₦50K OFFER
+        # ==============================
+        st.markdown("## 💎 Want GUARANTEED Results?")
 
-        st.success(f"Your link: {ref_link}")
-        st.write(f"Referrals: {st.session_state.ref_count}")
+        st.warning("""
+AI Career Acceleration Package
+
+✔ CV Rewrite  
+✔ LinkedIn Optimization  
+✔ 1-on-1 Strategy  
+✔ Job Visibility System  
+
+💰 ₦50,000
+""")
+
+        premium_msg = urllib.parse.quote(
+            "I want the 50k career acceleration package"
+        )
+
+        st.link_button(
+            "Secure Your Spot",
+            f"https://wa.me/YOUR_NUMBER?text={premium_msg}"
+        )
+
+        # ==============================
+        # 🧲 REFERRAL SYSTEM UI
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 🎁 Earn Rewards")
+
+        st.success(f"""
+Invite friends & earn rewards 🎉
+
+Your referral link:
+{ref_link}
+
+Referrals: {st.session_state.ref_count}
+""")
+
+        st.info("""
+🎁 3 referrals = FREE CV upgrade  
+🎁 10 referrals = FREE Premium Rewrite  
+🎁 25 referrals = 1-on-1 Session
+""")
 
 else:
     st.info("Enter CV + email")

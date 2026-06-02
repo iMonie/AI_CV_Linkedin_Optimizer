@@ -96,62 +96,40 @@ email = st.text_input("📧 Enter your email")
 # ==============================
 # 🚀 GENERATION
 # ==============================
-    if cv and email:
+if cv and email:
 
-        if st.button("**🚀 Generate My CV**"):
+    if st.button("🚀 Generate My CV"):
 
-            progress = st.progress(0)
-            status = st.empty()
+        progress = st.progress(0)
+        status = st.empty()
 
-            steps = [
-                "🔍 Analyzing CV...",
-                "🧠 Applying recruiter logic...",
-                "⚡ Optimizing bullet points...",
-                "📈 Adding achievements...",
-                "🎯 Finalizing..."
-            ]
+        steps = [
+            "🔍 Analyzing CV...",
+            "🧠 Applying recruiter logic...",
+            "⚡ Optimizing bullet points...",
+            "📈 Adding achievements...",
+            "🎯 Finalizing..."
+        ]
 
-            for i in range(100):
-                time.sleep(0.02)
-                progress.progress(i + 1)
-                status.text(random.choice(steps))
+        for i in range(100):
+            time.sleep(0.02)
+            progress.progress(i + 1)
+            status.text(random.choice(steps))
 
-            if plan == "basic":
-                prompt = f"""
-Improve this CV professionally:
-- Make it ATS friendly
-- Improve bullet points
-- Clean formatting
+        prompt = f"""
+You are an expert recruiter.
 
-CV:
-{cv}
-"""
-            else:
-                prompt = f"""
-You are an expert recruiter and strategist.
-
-1. Rewrite this CV to be highly competitive.
-2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
-3. Optimize for ATS and recruiter psychology & visibility.
-4. Suggest improvements for structure and keywords.
-5. Create a strong LinkedIn profile including:
-   - LinkedIn Headline
-   - LinkedIn About Section
-   - Key Skills Section
-   - Experience bullet improvements
-6. Position candidate as top 1%
-7. Add strong achievements
-8. Job tailored CV
-9. Create Cover Letter 
+Rewrite this CV professionally.
+Make it ATS optimized, impactful, and results-driven.
 
 CV:
 {cv}
 """
 
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}]
-            )
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
 
         result = response.choices[0].message.content
 
@@ -174,7 +152,10 @@ But visibility = opportunities.
 Top candidates show up DAILY on LinkedIn.
 """)
 
-        st.link_button("Start Growing", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
+        st.link_button(
+            "Start Growing",
+            "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
+        )
 
         # ==============================
         # 📲 WHATSAPP AUTO FOLLOW-UP
@@ -182,11 +163,9 @@ Top candidates show up DAILY on LinkedIn.
         st.markdown("---")
         st.markdown("## 💬 Get Personal Help (FASTEST WAY TO GET HIRED)")
 
-        whatsapp_message = f"""
+        whatsapp_message = """
 Hi, I just used your AI CV tool.
-
 I want help getting a job fast.
-Can you guide me?
 """
 
         encoded_msg = urllib.parse.quote(whatsapp_message)
@@ -222,7 +201,7 @@ AI Career Acceleration Package
         )
 
         # ==============================
-        # 🧲 REFERRAL SYSTEM UI
+        # 🧲 REFERRAL SYSTEM
         # ==============================
         st.markdown("---")
         st.markdown("## 🎁 Earn Rewards")

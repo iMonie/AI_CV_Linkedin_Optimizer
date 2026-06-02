@@ -83,7 +83,8 @@ def send_email(to_email, content):
         server.send_message(msg)
         server.quit()
         return True
-    except:
+    except Exception as e:
+        st.error(f"Email error: {e}")
         return False
 
 # ==============================
@@ -121,9 +122,10 @@ if remaining.total_seconds() > 0:
 
     st.warning(f"⏳ Offer expires in {minutes}:{seconds:02d}")
 
-    # Auto-refresh every second
-    time.sleep(1)
-    st.rerun()
+    # Auto-refresh every second using st.empty and st.rerun
+    time.sleep(1)  # Wait for 1 second before refreshing
+    st.rerun()     # Rerun to update countdown
+
 else:
     st.error("❌ Offer expired! Price returned to ₦10,000")
 
@@ -131,7 +133,7 @@ else:
 # 🎯 HEADER
 # ==============================
 st.title("🚀 AI CV + LinkedIn Optimizer")
-st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired faster.")
+st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired x10 faster.")
 
 st.markdown("---")
 
@@ -164,7 +166,7 @@ with col2:
 ✔ Recruiter-Level Rewrite  
 ✔ Achievement Metrics  
 ✔ Cover Letter  
-✔ Job-tailored CV  
+✔ Job-tailored CV + highly impactful
 """)
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
     st.markdown('</div>', unsafe_allow_html=True)
@@ -244,7 +246,7 @@ CV:
 
         st.success("🎉 CV Ready!")
 
-        st.download_button("📥 Download", result, file_name="optimized_cv.txt")
+        st.download_button("📥 Download", result)
 
         if send_email(email, result):
             st.success("📩 Sent to your email!")
@@ -265,7 +267,7 @@ But visibility = opportunities.
 Top candidates show up DAILY on LinkedIn.
 """)
 
-        st.link_button("Start Growing Your Presence", "YOUR_AFFILIATE_LINK")
+        st.link_button("Start Growing x10 FASTER", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
 
         # ==============================
         # 📲 WHATSAPP AUTO FOLLOW-UP
@@ -295,7 +297,7 @@ Can you guide me?
         st.warning("""
 AI Career Acceleration Package
 
-✔ Done for You CV Rewrite  
+✔ CV Rewrite  
 ✔ LinkedIn Optimization  
 ✔ 1-on-1 Strategy  
 ✔ Job Visibility System  
@@ -327,9 +329,9 @@ Your referral link:
 Referrals: {st.session_state.ref_count}
 """)
 
-        st.info(""" 
-🎁 10 referrals = FREE Premium Rewrite & Linkedin Optimization 
-🎁 25 referrals = Done for You CV & 1-on-1 Session
+        st.info("""  
+🎁 10 referrals = FREE CV Premium Rewrite  
+🎁 25 referrals = Done for You & 1-on-1 Session
 """)
 
 else:

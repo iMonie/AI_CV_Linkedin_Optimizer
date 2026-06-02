@@ -148,7 +148,7 @@ with col1:
     st.markdown('<div class="basic-card">', unsafe_allow_html=True)
     st.markdown("### 💼 Basic  (Free)")
     st.write("""
-✔ ATS Optimized CV  
+✔ Impactful ATS Optimized CV  
 ✔ Better bullet points  
 ✔ Clean formatting  
 """)
@@ -218,19 +218,50 @@ if plan in ["basic", "premium"]:
                     "Finalizing..."
                 ]))
 
-            prompt = f"Rewrite this CV professionally:\n{cv}"
+            if plan == "basic":
+                prompt = f"""
+Improve this CV professionally:
+- Make it ATS friendly
+- Improve bullet points
+- Clean formatting
+
+CV:
+{cv}
+"""
+            else:
+                prompt = f"""
+You are an expert recruiter and strategist.
+
+1. Rewrite this CV to be highly competitive.
+2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+3. Optimize for ATS and recruiter psychology & visibility.
+4. Suggest improvements for structure and keywords.
+5. Create a strong LinkedIn profile including:
+   - LinkedIn Headline
+   - LinkedIn About Section
+   - Key Skills Section
+   - Experience bullet improvements
+6. Position candidate as top 1%
+7. Add strong achievements
+8. Job tailored CV
+9. Create Cover Letter 
+
+CV:
+{cv}
+"""
 
             response = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}]
             )
 
-            result = response.choices[0].message.content
+        result = response.choices[0].message.content
 
-            st.success("🎉 Your CV is Ready!")
-            st.download_button("📥 Download", result)
+        st.success("🎉 CV Ready!")
+        st.download_button("Download", result)
 
-            send_email(email, result)
+        send_email(email, result)
+
 
             # ==============================
             # 🚀 VIRAL HOOK (NEW)

@@ -7,7 +7,6 @@ import random
 from datetime import datetime, timedelta
 import urllib.parse
 import re
-from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
 # ==============================
@@ -68,7 +67,7 @@ def send_email(to_email, content):
 # ==============================
 # 📄 PDF GENERATOR
 # ==============================
-def create_pdf(text):
+
     doc = SimpleDocTemplate("cv.pdf")
     styles = getSampleStyleSheet()
     content = []

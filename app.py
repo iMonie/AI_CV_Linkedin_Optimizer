@@ -5,146 +5,319 @@ from email.mime.text import MIMEText
 import time
 import random
 from datetime import datetime, timedelta
-import urllib.parse
 
+# ==============================
+# 🎨 UI DESIGN
+# ==============================
 st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
 
 st.markdown("""
 <style>
-.stApp {background: linear-gradient(135deg, #eef2ff, #ffffff);color: #111;}
-h1, h2, h3, h4, p {color: #111 !important;font-weight: 600;}
-.premium-card {background: white;padding: 20px;border-radius: 15px;border: 2px solid #2563eb;box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);}
-.basic-card {background: white;padding: 20px;border-radius: 15px;border: 1px solid #ddd;}
-textarea, input {background-color: #ffffff !important;color: #111 !important;border-radius: 10px;border: 1px solid #ddd;}
-.stButton>button {background-color: #2563eb;color: white;border-radius: 10px;font-weight: bold;}
-.stDownloadButton>button {background-color: #16a34a;color: white;border-radius: 10px;}
+.stApp {
+    background: linear-gradient(135deg, #eef2ff, #ffffff);
+    color: #111;
+}
+h1, h2, h3, h4, p {
+    color: #111 !important;
+    font-weight: 600;
+}
+
+/* Premium Glow */
+.premium-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #2563eb;
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+    transform: scale(1.02);
+}
+
+/* Basic Card */
+.basic-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+}
+
+textarea, input {
+    background-color: #ffffff !important;
+    color: #111 !important;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.stButton>button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.stDownloadButton>button {
+    background-color: #16a34a;
+    color: white;
+    border-radius: 10px;
+}
 </style>
 """, unsafe_allow_html=True)
 
+# ==============================
+# 🔐 API
+# ==============================
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
+# ==============================
+# 📩 EMAIL FUNCTION
+# ==============================
 def send_email(to_email, content):
     try:
         msg = MIMEText(content)
         msg['Subject'] = "🚀 Your AI Optimized CV + LinkedIn"
         msg['From'] = st.secrets["EMAIL_ADDRESS"]
         msg['To'] = to_email
+
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
         server.login(st.secrets["EMAIL_ADDRESS"], st.secrets["EMAIL_PASSWORD"])
         server.send_message(msg)
         server.quit()
         return True
-    except Exception as e:
-        st.error(f"Email error: {e}")
+    except:
         return False
 
-query_params = st.query_params
-ref = query_params.get("ref")
+# ==============================
+# 🔥 LIVE USERS COUNTER
+# ==============================
+live_users = random.randint(12, 47)
+st.markdown(f"🔥 **{live_users} people are using this right now**")
 
-if "ref_count" not in st.session_state:
-    st.session_state.ref_count = 0
+# ==============================
+# 🛒 FAKE PURCHASE POPUP
+# ==============================
+names = ["John", "David", "Sarah", "Chioma", "Michael", "Aisha", "Emeka", "Efe", "Musa", "Angela",]
+cities = ["Lagos", "Abuja", "Port Harcourt", "Ibadan", "Warri", "Benin", "Asaba", "Enugu"]
 
-if ref:
-    st.session_state.ref_count += 1
+popup_placeholder = st.empty()
 
-user_id = str(random.randint(10000, 99999))
-ref_link = f"https://aicvlinkedinoptimizer-hlhavswrjy84dp8obmejp4.streamlit.app/?ref={user_id}"
+name = random.choice(names)
+city = random.choice(cities)
 
-st.markdown(f"🔥 **{random.randint(12,47)} people are using this right now**")
+message = random.choice([
+    f"🔥 {name} from {city} just upgraded to Premium 💎",
+    f"🚀 {name} just optimized their CV",
+    f"💼 {name} just unlocked Premium features",
+])
 
-if "end_time" not in st.session_state:
-    st.session_state.end_time = datetime.now() + timedelta(minutes=15)
+popup_placeholder.success(message)
 
-remaining = st.session_state.end_time - datetime.now()
-if remaining.total_seconds() > 0:
-    st.warning(f"⏳ Offer expires in {int(remaining.total_seconds()//60)}:{int(remaining.total_seconds()%60):02d}")
-else:
-    st.error("❌ Offer expired!")
-
+# ==============================
+# 🎯 HEADER
+# ==============================
 st.title("🚀 AI CV + LinkedIn Optimizer")
-st.write("🔥 Beat 99% of applicants.")
+st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired X10 faster.")
+
+st.markdown("---")
+
+
+# ==============================
+# 💬 TESTIMONIALS
+# ==============================
+st.markdown("## 💬 What Users Are Saying")
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.success("⭐️⭐️⭐️⭐️⭐️\n\n'I got 3 interviews in 1 week!' — Sarah")
+
+with col2:
+    st.success("⭐️⭐️⭐️⭐️⭐️\n\n'Recruiters started replying instantly' — David")
+
+with col3:
+    st.success("⭐️⭐️⭐️⭐️⭐️\n\n'My CV finally looks professional!' — Chioma")
+
+st.markdown("---")
+
+# ==============================
+# 💳 PAYMENT
+# ==============================
+st.markdown("## 💳 Choose Your Package")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("### 💼 Basic")
-    if st.button("Start Free"):
-        st.session_state.plan = "basic"
+    st.markdown('<div class="basic-card">', unsafe_allow_html=True)
+    st.markdown("### 💼 Basic  (Free)")
+    st.write("""
+✔ ATS Optimized CV  
+
+✔ Better bullet points  
+
+✔ Clean formatting  
+""")
+    st.link_button("Start Free", "https://selar.co/11180kb0j4")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
+    st.markdown('<div class="premium-card">', unsafe_allow_html=True)
+
     st.markdown("### 💎 Premium")
-    if st.button("Upgrade Now 🚀"):
-        st.session_state.plan = "premium"
 
-plan = st.session_state.get("plan", "basic")
+    st.markdown("~~₦10,000~~  **₦1,000 (Today Only)**")
 
-cv = st.text_area("Paste CV")
-email = st.text_input("Email")
+    st.write("""
+🔥 EVERYTHING in Basic PLUS:
 
-if cv and email:
-    if st.button("🚀 Generate My CV"):
+✔ LinkedIn Headline  
 
-        progress = st.progress(0)
-        for i in range(100):
-            time.sleep(0.01)
-            progress.progress(i + 1)
+✔ LinkedIn About Section  
 
-        if plan == "basic":
-            prompt = f"""
+✔ Skills Optimization  
+
+✔ Recruiter-Level Rewrite  
+
+✔ Achievement Metrics  
+
+✔ Cover Letter  
+
+✔ Job-tailored CV  
+""")
+
+    st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown("---")
+
+# ==============================
+# 🔐 PREMIUM LOCK (NEW)
+# ==============================
+premium_access = False
+
+query_params = st.query_params
+plan = query_params.get("plan")
+
+if plan == "premium":
+    st.markdown("### 🔑 Enter Premium Access Code")
+    user_code = st.text_input("Access Code", type="password")
+
+    if user_code == st.secrets["PREMIUM_CODE"]:
+        premium_access = True
+        st.success("💎 Premium Unlocked")
+    elif user_code:
+        st.error("❌ Invalid code")
+
+# ==============================
+# 📥 INPUT
+# ==============================
+st.markdown("### 📄 Paste your CV here")
+cv = st.text_area(" ", height=200)
+
+st.markdown("### 📧 Enter your email")
+email = st.text_input(" ")
+
+# ==============================
+# 🚀 MAIN LOGIC
+# ==============================
+if plan in ["basic", "premium"]:
+
+    if plan == "basic":
+        st.success("✅ Basic Plan Activated")
+        st.warning("🚀 Upgrade to Premium for 10x better results")
+        st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
+
+    elif plan == "premium" and premium_access:
+        st.success("**💎 Premium Activated**")
+
+    elif plan == "premium" and not premium_access:
+        st.warning("🔒 Enter valid access code to continue")
+        st.stop()
+
+    if cv and email:
+
+        if st.button("**🚀 Generate My CV**"):
+
+            progress = st.progress(0)
+            status = st.empty()
+
+            steps = [
+                "🔍 Analyzing CV...",
+                "🧠 Applying recruiter logic...",
+                "⚡ Optimizing bullet points...",
+                "📈 Adding achievements...",
+                "🎯 Finalizing..."
+            ]
+
+            for i in range(100):
+                time.sleep(0.02)
+                progress.progress(i + 1)
+                status.text(random.choice(steps))
+
+            if plan == "basic":
+                prompt = f"""
 Improve this CV professionally:
-- ATS optimized
-- Better bullet points
-- Clean format
+- Make it highly impactful and ATS friendly
+- Improve bullet points
+- Clean formatting
 
 CV:
 {cv}
 """
-        else:
-            prompt = f"""
-You are a WORLD-CLASS recruiter and career strategist.
+            else:
+                prompt = f"""
+You are an expert recruiter and strategist.
 
-RETURN YOUR ANSWER IN CLEAR SECTIONS EXACTLY LIKE THIS:
+IMPORTANT: RETURN ALL SECTIONS CLEARLY.
 
 === FULL CV REWRITE ===
-Rewrite the CV with strong bullet points, metrics, and achievements.
+1. Rewrite this CV to be highly competitive.
+2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+3. Optimize for ATS and recruiter psychology & visibility.
+4. Suggest improvements for structure and keywords.
 
-=== LINKEDIN HEADLINE ===
-Create a powerful headline.
+=== LINKEDIN PROFILE ===
+- LinkedIn Headline
+- LinkedIn About Section
+- Key Skills Section
+- Experience bullet improvements
 
-=== LINKEDIN ABOUT ===
-Write a compelling About section.
+=== POSITIONING ===
+5. Position candidate as top 1%
+6. Add strong achievements
 
-=== KEY SKILLS ===
-List optimized skills.
-
-=== EXPERIENCE IMPROVEMENTS ===
-Rewrite experience with metrics.
-
-=== ACHIEVEMENTS ===
-Add measurable achievements.
-
-=== JOB TARGETING STRATEGY ===
-Give advice to tailor CV.
+=== JOB TARGETING ===
+7. Job tailored CV
 
 === COVER LETTER ===
-Write a strong tailored cover letter.
+8. Create Cover Letter
 
 CV:
 {cv}
 """
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
-        )
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}]
+            )
 
-        result = response.choices[0].message.content
+            result = response.choices[0].message.content
 
-        st.success("🎉 Done!")
-        st.download_button("Download", result)
+            st.success("🎉 Your CV is Ready!")
 
-        if send_email(email, result):
-            st.success("Sent to email!")
+            st.download_button("📥 Download", result, file_name="optimized_cv.txt")
 
-        if plan == "basic":
-            st.warning("Upgrade to unlock LinkedIn + Cover Letter 🚀")
+            if send_email(email, result):
+                st.success("📩 Sent to your email!")
+            else:
+                st.warning("⚠️ Email failed")
+
+    else:
+        st.info("Enter CV + email")
+
+else:
+    st.error("❌ Complete payment to unlock")
+
+# ==============================
+# FOOTER
+# ==============================
+st.markdown("---")
+st.caption("🚀 AI-powered career growth tool - designed by Oghenechovwe AKPOJOTOR")

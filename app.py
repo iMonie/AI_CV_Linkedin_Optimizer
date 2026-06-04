@@ -10,8 +10,7 @@ import urllib.parse
 # ==============================
 # 🎨 UI DESIGN
 # ==============================
-st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
-st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
+st.title("🚀 AI CV + LinkedIn Optimizer - That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
 
 st.markdown("""
 <style>

@@ -210,21 +210,70 @@ if plan in ["basic", "premium"]:
             # ==============================
 
             if jd:
-                prompt = f"""
-You are an expert recruiter.
+    prompt = f"""
+You are a TOP 1% recruiter and hiring strategist.
 
-1. Compare CV with Job Description
-2. Give MATCH SCORE %
-(Most hired candidates score 80%+)
+IMPORTANT RULES:
+- Be clean, structured, and professional
+- DO NOT use tables
+- DO NOT assume or fabricate experience (e.g., P&L if not stated)
+- Use clear headings and spacing
+- Output must look like a premium paid report
 
-3. Identify SKILL GAPS
-4. Extract TOP 20 KEYWORDS
-5. Rewrite CV using those keywords naturally
+---
 
-6. Convert responsibilities into ACHIEVEMENTS (use metrics)
-7. Do NOT assume missing data — highlight gaps
+### 1. MATCH ANALYSIS
+Compare the CV with the Job Description.
 
-8. Improve CV for ATS + recruiter psychology
+Provide:
+- Match Score (in %)
+- Add this line ABOVE score: "Most hired candidates score 80%+"
+- 3–5 bullet reasons explaining the score
+
+---
+
+### 2. SKILL GAP ANALYSIS
+Identify:
+- Missing critical skills
+- What can be reframed from existing experience
+- What the candidate MUST learn
+
+---
+
+### 3. TOP 20 KEYWORDS (ATS OPTIMIZED)
+Extract the most important keywords from the job description.
+
+- List clean bullet points
+- No repetition
+- No stuffing
+
+---
+
+### 4. ACHIEVEMENT REWRITE (HIGH IMPACT)
+Rewrite the candidate's experience into strong achievements:
+
+- Use metrics where AVAILABLE
+- If metrics are missing → DO NOT invent → instead say: "Add metric here"
+- Use action verbs
+- Make it recruiter-impressive
+
+---
+
+### 5. FULL ATS-OPTIMIZED CV (CLEAN FORMAT)
+
+Create a COMPLETE CV with:
+
+- Professional Summary (powerful + keyword optimized)
+- Work Experience (achievement-driven bullets)
+- Skills Section (aligned with job)
+- Clean formatting
+
+---
+
+### 6. FINAL IMPROVEMENT TIPS
+Give short recruiter-level advice to increase chances
+
+---
 
 CV:
 {cv}

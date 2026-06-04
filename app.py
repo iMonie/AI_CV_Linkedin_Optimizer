@@ -6,7 +6,6 @@ import time
 import random
 from datetime import datetime, timedelta
 import urllib.parse
-import re
 
 # ==============================
 # 🎨 UI DESIGN
@@ -19,8 +18,22 @@ st.markdown("""
     background: linear-gradient(135deg, #eef2ff, #ffffff);
     color: #111;
 }
-h1, h2, h3 {
+h1, h2, h3, h4, p {
     color: #111 !important;
+    font-weight: 600;
+}
+.premium-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #2563eb;
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+}
+.basic-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -36,7 +49,7 @@ client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 def send_email(to_email, content):
     try:
         msg = MIMEText(content)
-        msg['Subject'] = "🚀 Your AI Optimized CV"
+        msg['Subject'] = "🚀 Your AI Optimized CV + LinkedIn"
         msg['From'] = st.secrets["EMAIL_ADDRESS"]
         msg['To'] = to_email
 
@@ -49,30 +62,15 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 🔍 KEYWORD MATCH FUNCTION
-# ==============================
-def extract_keywords(text):
-    words = re.findall(r'\b[A-Za-z]{4,}\b', text.lower())
-    return list(set(words))
-
-def calculate_match(cv, jd):
-    if not jd.strip():
-        return None, []
-
-    jd_keywords = extract_keywords(jd)
-    cv_keywords = extract_keywords(cv)
-
-    matched = [k for k in jd_keywords if k in cv_keywords]
-    missing = [k for k in jd_keywords if k not in cv_keywords]
-
-    score = int((len(matched) / len(jd_keywords)) * 100) if jd_keywords else 0
-
-    return score, missing[:15]
-
-# ==============================
 # HEADER
 # ==============================
-st.title("🚀 AI CV Optimizer + Job Match")
+st.title("🚀 AI CV + LinkedIn Optimizer")
+
+# ==============================
+# PLAN
+# ==============================
+query_params = st.query_params
+plan = query_params.get("plan")
 
 # ==============================
 # INPUT
@@ -87,10 +85,12 @@ st.markdown("### 📧 Email")
 email = st.text_input("")
 
 # ==============================
-# PLAN
+# REFERRAL STATE
 # ==============================
-query_params = st.query_params
-plan = query_params.get("plan")
+if "ref_count" not in st.session_state:
+    st.session_state.ref_count = random.randint(0, 5)
+
+ref_link = f"https://yourapp.streamlit.app/?ref={random.randint(1000,9999)}"
 
 # ==============================
 # MAIN
@@ -101,66 +101,63 @@ if plan in ["basic", "premium"]:
 
         if st.button("🚀 Generate"):
 
-            # ==============================
-            # 🔥 MATCH SCORE DISPLAY
-            # ==============================
-            score, missing = calculate_match(cv, jd)
-
-            if score is not None:
-                st.markdown("## 🎯 Job Match Score")
-
-                st.progress(score / 100)
-
-                if score >= 80:
-                    st.success(f"🔥 Strong Match: {score}%")
-                elif score >= 50:
-                    st.warning(f"⚠️ متوسط Match: {score}%")
-                else:
-                    st.error(f"❌ Weak Match: {score}%")
-
-                if missing:
-                    st.markdown("### ❗ Missing Keywords")
-                    st.write(", ".join(missing))
-
-            # ==============================
-            # ⏳ LOADING
-            # ==============================
             progress = st.progress(0)
             for i in range(100):
                 time.sleep(0.01)
                 progress.progress(i + 1)
 
-            # ==============================
-            # PROMPT
-            # ==============================
             if plan == "basic":
                 prompt = f"""
-Improve this CV professionally:
-- ATS friendly
-- Better bullet points
+Improve this CV:
+- Make ATS friendly
+- Improve bullet points
 
 CV:
 {cv}
 """
+
             else:
                 prompt = f"""
-You are an expert recruiter.
+You are an expert recruiter and strategist.
 
+=== CONTEXT ===
 Resume:
 {cv}
 
-Job Description:
+Job Description (if provided):
 {jd}
 
-TASKS:
-- Rewrite CV (results-driven)
-- Add achievements with metrics
-- Compare CV vs JD → show gaps
-- Extract & integrate top 20 keywords
-- Optimize for ATS
-- Create LinkedIn (Headline, About, Skills)
-- Create Cover Letter
-- Create Job-tailored CV
+=== TASKS ===
+
+1. Rewrite CV to be highly competitive and results-driven.
+
+2. Turn responsibilities into strong achievements with metrics.
+If key data is missing, highlight where metrics can be added.
+
+3. Compare CV vs Job Description:
+- Identify missing skills
+- Show gaps clearly
+- Suggest what to reframe vs what to learn
+
+4. Extract top 20 keywords from Job Description
+- Integrate them naturally into CV
+
+5. Optimize for ATS + recruiter psychology
+
+6. Create:
+- LinkedIn Headline
+- LinkedIn About
+- Skills Section
+- Improved Experience bullets
+
+7. Position candidate as TOP 1%
+
+8. Create:
+- Job-tailored CV
+- Cover Letter
+
+IMPORTANT:
+Return results in clearly separated sections.
 """
 
             response = client.chat.completions.create(
@@ -183,11 +180,15 @@ TASKS:
         st.markdown("## 🚀 Want Recruiters to FIND You?")
 
         st.info("""
+Your CV is strong…
+
+But visibility = opportunities.
+
 Top candidates show up DAILY on LinkedIn.
 """)
 
         st.link_button(
-            "Increase visibility now",
+            "Many have used this system to increase visibility — want it?",
             "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
         )
 
@@ -203,6 +204,26 @@ Top candidates show up DAILY on LinkedIn.
             f"https://wa.me/2348035341982?text={encoded_msg}"
         )
 
+        # ==============================
+        # 🧲 REFERRAL SYSTEM
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 🎁 Earn Rewards")
+
+        st.success(f"""
+Invite friends & earn rewards 🎉
+
+Your referral link:
+{ref_link}
+
+Referrals: {st.session_state.ref_count}
+""")
+
+        st.info("""
+🎁 10 referrals = FREE CV Premium Rewrite & Linkedin Optimization  
+🎁 25 referrals = Done for You & 1-on-1 Session  
+""")
+
     else:
         st.info("Enter CV + email")
 
@@ -212,4 +233,4 @@ else:
 # ==============================
 # FOOTER
 # ==============================
-st.caption("🚀 Built to get you hired faster")
+st.caption("Built for serious job seekers 🚀")

@@ -239,19 +239,23 @@ CV:
 """
             else:
                 prompt = f"""
-You are an expert recruiter and strategist.
+You are a WORLD CLASS Recuiter and an expert strategist.
 
 IMPORTANT: RETURN ALL SECTIONS CLEARLY.
 
 === FULL CV REWRITE ===
-1. Rewrite this CV to be highly competitive.
-2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+1. Rewrite this CV to be highly competitive and  impactful.
+2. Rewrite it to be results-driven with strong metrics - quantified.
 3. Optimize for ATS and recruiter psychology & visibility.
 4. Suggest improvements for structure and keywords.
+5. . Turn boring tasks into strong achievements
+Convert my responsibilities into achievement-driven bullet points. Use metrics and results.
 
 === LINKEDIN PROFILE ===
 - LinkedIn Headline
-- LinkedIn About Section
+- Write a LinkedIn About section that sounds human
+Write my LinkedIn About section in first person. No buzzwords. Focus on problems I solve and who I help. Keep it under 250 words.
+Create 3 versions: formal, conversational, bold.
 - Key Skills Section
 - Experience bullet improvements
 

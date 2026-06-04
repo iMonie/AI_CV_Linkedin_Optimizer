@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 import time
 import random
 from datetime import datetime, timedelta
+import urllib.parse
 
 # ==============================
 # 🎨 UI DESIGN
@@ -94,21 +95,18 @@ st.markdown(f"🔥 **{live_users} people are using this right now**")
 # ==============================
 # 🛒 FAKE PURCHASE POPUP
 # ==============================
-names = ["John", "David", "Sarah", "Chioma", "Michael", "Aisha", "Emeka", "Efe", "Musa", "Angela",]
+names = ["John", "David", "Sarah", "Chioma", "Michael", "Aisha", "Emeka", "Efe", "Musa", "Angela"]
 cities = ["Lagos", "Abuja", "Port Harcourt", "Ibadan", "Warri", "Benin", "Asaba", "Enugu"]
 
 popup_placeholder = st.empty()
 
-name = random.choice(names)
-city = random.choice(cities)
-
-message = random.choice([
-    f"🔥 {name} from {city} just upgraded to Premium 💎",
-    f"🚀 {name} just optimized their CV",
-    f"💼 {name} just unlocked Premium features",
-])
-
-popup_placeholder.success(message)
+popup_placeholder.success(
+    random.choice([
+        f"🔥 {random.choice(names)} from {random.choice(cities)} just upgraded to Premium 💎",
+        f"🚀 {random.choice(names)} just optimized their CV",
+        f"💼 {random.choice(names)} just unlocked Premium features",
+    ])
+)
 
 # ==============================
 # 🎯 HEADER
@@ -117,7 +115,6 @@ st.title("🚀 AI CV + LinkedIn Optimizer")
 st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired X10 faster.")
 
 st.markdown("---")
-
 
 # ==============================
 # 💬 TESTIMONIALS
@@ -149,9 +146,7 @@ with col1:
     st.markdown("### 💼 Basic  (Free)")
     st.write("""
 ✔ ATS Optimized CV  
-
 ✔ Better bullet points  
-
 ✔ Clean formatting  
 """)
     st.link_button("Start Free", "https://selar.co/11180kb0j4")
@@ -159,52 +154,29 @@ with col1:
 
 with col2:
     st.markdown('<div class="premium-card">', unsafe_allow_html=True)
-
     st.markdown("### 💎 Premium")
-
     st.markdown("~~₦10,000~~  **₦1,000 (Today Only)**")
-
     st.write("""
 🔥 EVERYTHING in Basic PLUS:
 
 ✔ LinkedIn Headline  
-
 ✔ LinkedIn About Section  
-
 ✔ Skills Optimization  
-
 ✔ Recruiter-Level Rewrite  
-
 ✔ Achievement Metrics  
-
 ✔ Cover Letter  
-
 ✔ Job-tailored CV  
 """)
-
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
-
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
 # ==============================
-# 🔐 PREMIUM LOCK (NEW)
+# 🔍 PLAN CHECK
 # ==============================
-premium_access = False
-
 query_params = st.query_params
 plan = query_params.get("plan")
-
-if plan == "premium":
-    st.markdown("### 🔑 Enter Premium Access Code")
-    user_code = st.text_input("Access Code", type="password")
-
-    if user_code == st.secrets["PREMIUM_CODE"]:
-        premium_access = True
-        st.success("💎 Premium Unlocked")
-    elif user_code:
-        st.error("❌ Invalid code")
 
 # ==============================
 # 📥 INPUT
@@ -216,6 +188,14 @@ st.markdown("### 📧 Enter your email")
 email = st.text_input(" ")
 
 # ==============================
+# 🧠 SESSION STATE (REFERRAL)
+# ==============================
+if "ref_count" not in st.session_state:
+    st.session_state.ref_count = random.randint(0, 5)
+
+ref_link = f"https://yourapp.streamlit.app/?ref={random.randint(1000,9999)}"
+
+# ==============================
 # 🚀 MAIN LOGIC
 # ==============================
 if plan in ["basic", "premium"]:
@@ -224,13 +204,8 @@ if plan in ["basic", "premium"]:
         st.success("✅ Basic Plan Activated")
         st.warning("🚀 Upgrade to Premium for 10x better results")
         st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
-
-    elif plan == "premium" and premium_access:
+    else:
         st.success("**💎 Premium Activated**")
-
-    elif plan == "premium" and not premium_access:
-        st.warning("🔒 Enter valid access code to continue")
-        st.stop()
 
     if cv and email:
 
@@ -255,7 +230,7 @@ if plan in ["basic", "premium"]:
             if plan == "basic":
                 prompt = f"""
 Improve this CV professionally:
-- Rewrite it and upgrade it to be highly impactful and ATS friendly
+- Make it highly impactful and ATS friendly
 - Improve bullet points
 - Clean formatting
 
@@ -264,7 +239,7 @@ CV:
 """
             else:
                 prompt = f"""
-You are a WORLD-CLASS recruiter and an expert strategist.
+You are an expert recruiter and strategist.
 
 IMPORTANT: RETURN ALL SECTIONS CLEARLY.
 
@@ -309,6 +284,57 @@ CV:
                 st.success("📩 Sent to your email!")
             else:
                 st.warning("⚠️ Email failed")
+
+        # ==============================
+        # 🚀 VIRAL HOOK
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 🚀 Want Recruiters to FIND You?")
+
+        st.info("""
+Your CV is strong…
+
+But visibility = opportunities.
+
+Top candidates show up DAILY on LinkedIn.
+""")
+
+        st.link_button(
+            "Many have used this system to increase visibility — want it?",
+            "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
+        )
+
+        # ==============================
+        # 📲 WHATSAPP
+        # ==============================
+        encoded_msg = urllib.parse.quote(
+            "I just used your AI CV tool. Help me get hired fast."
+        )
+
+        st.link_button(
+            "💬 Chat on WhatsApp",
+            f"https://wa.me/2348035341982?text={encoded_msg}"
+        )
+
+        # ==============================
+        # 🧲 REFERRAL SYSTEM UI
+        # ==============================
+        st.markdown("---")
+        st.markdown("## 🎁 Earn Rewards")
+
+        st.success(f"""
+Invite friends & earn rewards 🎉
+
+Your referral link:
+{ref_link}
+
+Referrals: {st.session_state.ref_count}
+""")
+
+        st.info("""
+🎁 10 referrals = FREE CV Premium Rewrite & Linkedin Optimization  
+🎁 25 referrals = Done for You & 1-on-1 Session  
+""")
 
     else:
         st.info("Enter CV + email")

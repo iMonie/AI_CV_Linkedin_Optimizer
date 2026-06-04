@@ -242,6 +242,19 @@ Most hired candidates score 80%+
 - Summary
 - Experience
 - Skills
+1. Rewrite this CV to be highly competitive.
+2. Make it results-driven with strong metrics - quantified, and impactful.
+3. Optimize for ATS and recruiter psychology & visibility.
+4. Suggest improvements for structure and keywords.
+5. Create a strong LinkedIn profile including:
+   - LinkedIn Headline
+   - LinkedIn About Section
+   - Key Skills Section
+   - Experience bullet improvements
+6. Position candidate as top 1%
+7. Job tailored CV
+8. Cover Letter
+
 
 ---
 

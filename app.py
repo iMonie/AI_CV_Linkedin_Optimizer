@@ -118,13 +118,10 @@ with col1:
         box-shadow:0 5px 15px rgba(0,0,0,0.05);
     ">
     <h3>💼 Basic (Free)</h3>
-
     <p>✔ ATS Optimized CV</p>
     <p>✔ Better bullet points</p>
     <p>✔ Clean formatting</p>
-
     <br>
-
     <p style="color:#6b7280;">Perfect for quick improvement</p>
     </div>
     """, unsafe_allow_html=True)
@@ -142,16 +139,12 @@ with col2:
         transform:scale(1.03);
     ">
     <h3>💎 Premium</h3>
-
     <p style="font-size:20px;">
     <span style="text-decoration:line-through;color:gray;">₦10,000</span>
     <strong style="color:#16a34a;"> ₦1,000 Today</strong>
     </p>
-
     <hr>
-
     <p>🔥 EVERYTHING in Basic PLUS:</p>
-
     <p>✔ LinkedIn Headline</p>
     <p>✔ LinkedIn About Section</p>
     <p>✔ Skills Optimization</p>
@@ -159,9 +152,7 @@ with col2:
     <p>✔ Achievement Metrics</p>
     <p>✔ Cover Letter</p>
     <p>✔ Job-tailored CV</p>
-
     <br>
-
     <p style="color:#16a34a;font-weight:bold;">
     ⚡ Most users upgrade after seeing results
     </p>
@@ -206,11 +197,10 @@ if plan in ["basic", "premium"]:
                 progress.progress(i + 1)
 
             # ==============================
-            # 🧠 PROMPT LOGIC
+            # 🧠 PROMPT LOGIC (FIXED)
             # ==============================
-
-            if jd:
-    prompt = f"""
+            if jd and jd.strip() != "":
+                prompt = f"""
 You are a TOP 1% recruiter and hiring strategist.
 
 IMPORTANT RULES:
@@ -224,7 +214,6 @@ IMPORTANT RULES:
 ### 1. MATCH ANALYSIS
 Most hired candidates score 80%+
 
-Provide:
 - Match Score (%)
 - 3–5 bullet reasons
 
@@ -283,9 +272,7 @@ CV:
             result = response.choices[0].message.content
 
             st.success("✅ Done")
-
             st.download_button("📥 Download", result)
-
             send_email(email, result)
 
         # ==============================

@@ -255,7 +255,7 @@ if plan in ["basic", "premium"]:
             if plan == "basic":
                 prompt = f"""
 Improve this CV professionally:
-- Make it highly impactful and ATS friendly
+- Rewrite it and upgrade it to be highly impactful and ATS friendly
 - Improve bullet points
 - Clean formatting
 

@@ -215,10 +215,10 @@ CV:
             prompt = f"""
 You are an expert recruiter and strategist.
 
-1. Rewrite this CV to be highly competitive and impactful.
-2. Rewrite it to be results-driven with strong metrics and quantified.
-3. Optimize for ATS and recruiter psychology & visibility.
-4. Suggest improvements for structure and keywords.
+1. Rewrite this CV to be highly competitive
+2. Rewrite it to be results-driven with strong metrics - quantified and impactful
+3. Optimize for ATS and recruiter psychology & visibility
+4. Suggest improvements for structure and keywords
 5. Create a strong LinkedIn profile including:
    - LinkedIn Headline
    - LinkedIn About Section

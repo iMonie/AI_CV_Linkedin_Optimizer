@@ -15,50 +15,43 @@ st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(135deg, #eef2ff, #ffffff);
-    color: #111;
+background: linear-gradient(135deg, #eef2ff, #ffffff);
+color: #111;
 }
 h1, h2, h3, h4, p {
-    color: #111 !important;
-    font-weight: 600;
+color: #111 !important;
+font-weight: 600;
 }
-
-/* Premium Glow */
 .premium-card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid #2563eb;
-    box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
-    transform: scale(1.02);
+background: white;
+padding: 20px;
+border-radius: 15px;
+border: 2px solid #2563eb;
+box-shadow: 0 0 25px rgba(37, 99, 235, 0.4);
+transform: scale(1.02);
 }
-
-/* Basic Card */
 .basic-card {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #ddd;
+background: white;
+padding: 20px;
+border-radius: 15px;
+border: 1px solid #ddd;
 }
-
 textarea, input {
-    background-color: #ffffff !important;
-    color: #111 !important;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+background-color: #ffffff !important;
+color: #111 !important;
+border-radius: 10px;
+border: 1px solid #ddd;
 }
-
 .stButton>button {
-    background-color: #2563eb;
-    color: white;
-    border-radius: 10px;
-    font-weight: bold;
+background-color: #2563eb;
+color: white;
+border-radius: 10px;
+font-weight: bold;
 }
-
 .stDownloadButton>button {
-    background-color: #16a34a;
-    color: white;
-    border-radius: 10px;
+background-color: #16a34a;
+color: white;
+border-radius: 10px;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -88,7 +81,7 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 🔗 REFERRAL SYSTEM (LOGIC)
+# 🔗 REFERRAL SYSTEM
 # ==============================
 query_params = st.query_params
 ref = query_params.get("ref")
@@ -109,7 +102,7 @@ live_users = random.randint(12, 47)
 st.markdown(f"🔥 **{live_users} people are using this right now**")
 
 # ==============================
-# ⏳ FIXED COUNTDOWN (NO LAG)
+# ⏳ COUNTDOWN
 # ==============================
 if "end_time" not in st.session_state:
     st.session_state.end_time = datetime.now() + timedelta(minutes=15)
@@ -132,7 +125,7 @@ st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired x10 faster.")
 st.markdown("---")
 
 # ==============================
-# 💳 PAYMENT
+# 💳 PAYMENT (UPDATED LOGIC ONLY)
 # ==============================
 col1, col2 = st.columns(2)
 
@@ -144,7 +137,9 @@ with col1:
 ✔ Better bullet points  
 ✔ Clean formatting  
 """)
-    st.link_button("Start Free", "https://selar.co/11180kb0j4")
+    if st.button("Start Free"):
+        st.session_state.plan = "basic"
+    st.link_button("Continue Free", "https://selar.co/11180kb0j4")
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
@@ -160,9 +155,11 @@ with col2:
 ✔ Recruiter-Level Rewrite  
 ✔ Achievement Metrics  
 ✔ Cover Letter  
-✔ Job-tailored CV + highly impactful
+✔ Job-tailored CV  
 """)
-    st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
+    if st.button("Upgrade Now 🚀"):
+        st.session_state.plan = "premium"
+    st.link_button("Pay Here", "https://selar.co/m001q0082z")
     st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("---")
@@ -177,9 +174,9 @@ st.markdown("### 📧 Enter your email")
 email = st.text_input(" ")
 
 # ==============================
-# 🧠 PLAN SAFE DEFAULT
+# 🧠 PLAN DEFAULT FIXED
 # ==============================
-plan = st.session_state.get("plan", "premium")
+plan = st.session_state.get("plan", "basic")
 
 # ==============================
 # 🚀 GENERATION
@@ -218,8 +215,8 @@ CV:
             prompt = f"""
 You are an expert recruiter and strategist.
 
-1. Rewrite this CV to be highly competitive.
-2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+1. Rewrite this CV to be highly competitive and impactful.
+2. Rewrite it to be results-driven with strong metrics and quantified.
 3. Optimize for ATS and recruiter psychology & visibility.
 4. Suggest improvements for structure and keywords.
 5. Create a strong LinkedIn profile including:
@@ -244,11 +241,26 @@ CV:
         result = response.choices[0].message.content
 
         st.success("🎉 CV Ready!")
-
         st.download_button("📥 Download", result)
 
         if send_email(email, result):
             st.success("📩 Sent to your email!")
+
+        # 🔥 PREMIUM TEASE
+        if plan == "basic":
+            st.warning("""
+⚠️ This is the FREE version.
+
+Upgrade to unlock:
+✔ LinkedIn optimization  
+✔ Recruiter positioning 
+✔ A results-driven CV with strong metrics
+✔ CV that is optimized for ATS and recruiter psychology & visibility.
+✔ Suggest improvements for structure and keywords
+✔ Cover letter  
+
+Upgrade now 🚀
+""")
 
         # ==============================
         # 🚀 VIRAL HOOK
@@ -293,9 +305,9 @@ Your referral link:
 Referrals: {st.session_state.ref_count}
 """)
 
-        st.info(""" 
-🎁 10 referrals = FREE CV Premium Rewrite & Linkedin Optimization 
-🎁 25 referrals = Done for You & 1-on-1 Session
+        st.info("""
+🎁 10 referrals = FREE CV Premium Rewrite & Linkedin Optimization  
+🎁 25 referrals = Done for You & 1-on-1 Session  
 """)
 
 else:

@@ -7,7 +7,6 @@ import random
 from datetime import datetime, timedelta
 import urllib.parse
 import re
-from reportlab.lib.styles import getSampleStyleSheet
 
 # ==============================
 # 🎨 UI DESIGN
@@ -20,26 +19,11 @@ st.markdown("""
     background: linear-gradient(135deg, #eef2ff, #ffffff);
     color: #111;
 }
-h1, h2, h3, h4, p {
+h1, h2, h3 {
     color: #111 !important;
-    font-weight: 600;
 }
 </style>
 """, unsafe_allow_html=True)
-
-# ==============================
-# 🔥 NEW HEADLINE + FEATURES
-# ==============================
-st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
-
-st.markdown("""
-### 💼 What This App Does:
-✅ CV + Job Description matching  
-✅ Skill gap detection  
-✅ Keyword extraction (ATS hacking)  
-✅ Achievement rewriting with intelligence  
-✅ Recruiter-level positioning  
-""")
 
 # ==============================
 # 🔐 API
@@ -65,21 +49,7 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 📄 PDF GENERATOR
-# ==============================
-
-    doc = SimpleDocTemplate("cv.pdf")
-    styles = getSampleStyleSheet()
-    content = []
-
-    for line in text.split("\n"):
-        content.append(Paragraph(line, styles["Normal"]))
-
-    doc.build(content)
-    return "cv.pdf"
-
-# ==============================
-# 🔍 MATCH FUNCTION
+# 🔍 KEYWORD MATCH FUNCTION
 # ==============================
 def extract_keywords(text):
     words = re.findall(r'\b[A-Za-z]{4,}\b', text.lower())
@@ -96,12 +66,13 @@ def calculate_match(cv, jd):
     missing = [k for k in jd_keywords if k not in cv_keywords]
 
     score = int((len(matched) / len(jd_keywords)) * 100) if jd_keywords else 0
+
     return score, missing[:15]
 
 # ==============================
-# 🔥 LIVE USERS
+# HEADER
 # ==============================
-st.markdown(f"🔥 **{random.randint(12,47)} people are using this right now**")
+st.title("🚀 AI CV Optimizer + Job Match")
 
 # ==============================
 # INPUT
@@ -112,7 +83,7 @@ cv = st.text_area("", height=200)
 st.markdown("### 💼 Paste Job Description (Optional)")
 jd = st.text_area("", height=200)
 
-st.markdown("### 📧 Enter your email")
+st.markdown("### 📧 Email")
 email = st.text_input("")
 
 # ==============================
@@ -122,35 +93,28 @@ query_params = st.query_params
 plan = query_params.get("plan")
 
 # ==============================
-# REFERRAL
-# ==============================
-if "ref_count" not in st.session_state:
-    st.session_state.ref_count = random.randint(0, 5)
-
-ref_link = f"https://yourapp.streamlit.app/?ref={random.randint(1000,9999)}"
-
-# ==============================
-# MAIN LOGIC
+# MAIN
 # ==============================
 if plan in ["basic", "premium"]:
 
     if cv and email:
 
-        if st.button("🚀 Generate My CV"):
+        if st.button("🚀 Generate"):
 
-            # MATCH SCORE
+            # ==============================
+            # 🔥 MATCH SCORE DISPLAY
+            # ==============================
             score, missing = calculate_match(cv, jd)
 
             if score is not None:
                 st.markdown("## 🎯 Job Match Score")
-                st.info("Most hired candidates score 80%+")
 
                 st.progress(score / 100)
 
                 if score >= 80:
                     st.success(f"🔥 Strong Match: {score}%")
                 elif score >= 50:
-                    st.warning(f"⚠️ Average Match: {score}%")
+                    st.warning(f"⚠️ متوسط Match: {score}%")
                 else:
                     st.error(f"❌ Weak Match: {score}%")
 
@@ -158,16 +122,20 @@ if plan in ["basic", "premium"]:
                     st.markdown("### ❗ Missing Keywords")
                     st.write(", ".join(missing))
 
-            # LOADING
+            # ==============================
+            # ⏳ LOADING
+            # ==============================
             progress = st.progress(0)
             for i in range(100):
                 time.sleep(0.01)
                 progress.progress(i + 1)
 
+            # ==============================
             # PROMPT
+            # ==============================
             if plan == "basic":
                 prompt = f"""
-Improve this CV:
+Improve this CV professionally:
 - ATS friendly
 - Better bullet points
 
@@ -176,7 +144,7 @@ CV:
 """
             else:
                 prompt = f"""
-You are an expert recruiter and strategist.
+You are an expert recruiter.
 
 Resume:
 {cv}
@@ -185,15 +153,14 @@ Job Description:
 {jd}
 
 TASKS:
-1. Rewrite CV (results-driven, metrics)
-2. Convert responsibilities into achievements
-3. Compare CV vs JD → show gaps
-4. Extract top 20 keywords + integrate
-5. Optimize for ATS
-6. Create LinkedIn (Headline, About, Skills)
-7. Add strong achievements
-8. Job-tailored CV
-9. Cover Letter
+- Rewrite CV (results-driven)
+- Add achievements with metrics
+- Compare CV vs JD → show gaps
+- Extract & integrate top 20 keywords
+- Optimize for ATS
+- Create LinkedIn (Headline, About, Skills)
+- Create Cover Letter
+- Create Job-tailored CV
 """
 
             response = client.chat.completions.create(
@@ -203,13 +170,9 @@ TASKS:
 
             result = response.choices[0].message.content
 
-            st.success("🎉 Your CV is Ready!")
+            st.success("Done ✅")
 
-            st.download_button("📥 Download TXT", result)
-
-            pdf_file = create_pdf(result)
-            with open(pdf_file, "rb") as f:
-                st.download_button("📄 Download PDF", f, file_name="cv.pdf")
+            st.download_button("Download", result)
 
             send_email(email, result)
 
@@ -220,15 +183,11 @@ TASKS:
         st.markdown("## 🚀 Want Recruiters to FIND You?")
 
         st.info("""
-Your CV is strong…
-
-But visibility = opportunities.
-
 Top candidates show up DAILY on LinkedIn.
 """)
 
         st.link_button(
-            "Many have used this system to increase visibility — want it?",
+            "Increase visibility now",
             "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
         )
 
@@ -244,34 +203,13 @@ Top candidates show up DAILY on LinkedIn.
             f"https://wa.me/2348035341982?text={encoded_msg}"
         )
 
-        # ==============================
-        # 🎁 REFERRAL
-        # ==============================
-        st.markdown("---")
-        st.markdown("## 🎁 Earn Rewards")
-
-        st.success(f"""
-Invite friends & earn rewards 🎉
-
-Your referral link:
-{ref_link}
-
-Referrals: {st.session_state.ref_count}
-""")
-
-        st.info("""
-🎁 10 referrals = FREE CV Premium Rewrite & Linkedin Optimization  
-🎁 25 referrals = Done for You & 1-on-1 Session  
-""")
-
     else:
         st.info("Enter CV + email")
 
 else:
-    st.error("❌ Complete payment to unlock")
+    st.error("Complete payment")
 
 # ==============================
 # FOOTER
 # ==============================
-st.markdown("---")
-st.caption("🚀 AI-powered career growth tool - designed by Oghenechovwe AKPOJOTOR")
+st.caption("🚀 Built to get you hired faster")

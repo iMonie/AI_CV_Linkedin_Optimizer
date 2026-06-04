@@ -11,6 +11,7 @@ import urllib.parse
 # 🎨 UI DESIGN
 # ==============================
 st.set_page_config(page_title="AI CV + LinkedIn Optimizer", page_icon="🚀")
+st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
 
 st.markdown("""
 <style>
@@ -182,19 +183,40 @@ st.markdown("### 📧 Email")
 email = st.text_input("")
 
 # ==============================
-# MAIN LOGIC
+# 🚀 MAIN LOGIC
 # ==============================
 if plan in ["basic", "premium"]:
 
+    if plan == "basic":
+        st.success("✅ Basic Plan Activated")
+        st.warning("🚀 Upgrade to Premium for 10x better results")
+        st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
+
+    else:
+        st.success("**💎 Premium Activated**")
+
     if cv and email:
 
-        if st.button("🚀 Generate"):
+        if st.button("**🚀 Generate My CV**"):
 
             progress = st.progress(0)
+            status = st.empty()
+
+            steps = [
+                "🔍 Analyzing CV...",
+                "🧠 Applying recruiter logic...",
+                "⚡ Optimizing bullet points...",
+                "📈 Adding achievements...",
+                "🎯 Finalizing..."
+            ]
 
             for i in range(100):
-                time.sleep(0.01)
+                time.sleep(0.02)
                 progress.progress(i + 1)
+                status.text(random.choice(steps))
+
+            if plan == "basic":
+                prompt = f""
 
             # ==============================
             # 🧠 PROMPT LOGIC (FIXED)
@@ -238,19 +260,20 @@ Most hired candidates score 80%+
 
 ---
 
-### 5. FULL DETAILED ATS CV REWRITE
-1. Rewrite this CV to be highly competitive.
+### 5. FULL ATS CV 
+1. Rewrite this CV to be detailed and highly competitive.
 2. Rewrite it to become results-driven with strong metrics - quantified, and impactful.
 3. Optimize for ATS and recruiter psychology & visibility.
-4. Suggest improvements for structure and keywords.
-5. Create a strong detailed LinkedIn profile including:
+4. Format like a paid Jobscan or McKinsey-style report.
+5. Suggest improvements for structure and keywords.
+6. Create a strong detailed LinkedIn profile including:
    - LinkedIn Headline
    - LinkedIn About Section
    - Key Skills Section
    - Experience bullet improvements
-6. Position candidate as top 1%
-7. Job tailored CV
-8. Cover Letter
+7. Position candidate as top 1%
+8. Job tailored CV
+9. Cover Letter
 
 
 ---

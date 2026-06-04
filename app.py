@@ -239,9 +239,6 @@ Most hired candidates score 80%+
 ---
 
 ### 5. FULL ATS CV
-- Summary
-- Experience
-- Skills
 1. Rewrite this CV to be highly competitive.
 2. Make it results-driven with strong metrics - quantified, and impactful.
 3. Optimize for ATS and recruiter psychology & visibility.

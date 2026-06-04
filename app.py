@@ -10,6 +10,7 @@ import urllib.parse
 # ==============================
 # 🎨 UI DESIGN
 # ==============================
+
 st.title("🚀 AI CV + LinkedIn Optimizer - That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
 
 st.markdown("""

@@ -102,28 +102,75 @@ st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired X10 faster.")
 st.markdown("---")
 
 # ==============================
-# PAYMENT
+# 💳 PAYMENT (UPGRADED UI)
 # ==============================
 st.markdown("## 💳 Choose Your Package")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('<div class="basic-card">', unsafe_allow_html=True)
-    st.markdown("### 💼 Basic  (Free)")
-    st.write("✔ ATS CV ✔ Formatting ✔ Bullet Improvement")
+    st.markdown("""
+    <div style="
+        background:white;
+        padding:25px;
+        border-radius:15px;
+        border:1px solid #e5e7eb;
+        box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    ">
+    <h3>💼 Basic (Free)</h3>
+
+    <p>✔ ATS Optimized CV</p>
+    <p>✔ Better bullet points</p>
+    <p>✔ Clean formatting</p>
+
+    <br>
+
+    <p style="color:#6b7280;">Perfect for quick improvement</p>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.link_button("Start Free", "https://selar.co/11180kb0j4")
-    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    st.markdown('<div class="premium-card">', unsafe_allow_html=True)
-    st.markdown("### 💎 Premium")
-    st.markdown("~~₦10,000~~  **₦1,000 Today**")
-    st.write("🔥 FULL REWRITE + LINKEDIN + COVER LETTER")
-    st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="
+        background:white;
+        padding:25px;
+        border-radius:15px;
+        border:2px solid #2563eb;
+        box-shadow:0 0 30px rgba(37,99,235,0.35);
+        transform:scale(1.03);
+    ">
+    <h3>💎 Premium</h3>
 
-st.markdown("---")
+    <p style="font-size:20px;">
+    <span style="text-decoration:line-through;color:gray;">₦10,000</span>
+    <strong style="color:#16a34a;"> ₦1,000 Today</strong>
+    </p>
+
+    <hr>
+
+    <p>🔥 EVERYTHING in Basic PLUS:</p>
+
+    <p>✔ LinkedIn Headline</p>
+    <p>✔ LinkedIn About Section</p>
+    <p>✔ Skills Optimization</p>
+    <p>✔ Recruiter-Level Rewrite</p>
+    <p>✔ Achievement Metrics</p>
+    <p>✔ Cover Letter</p>
+    <p>✔ Job-tailored CV</p>
+
+    <br>
+
+    <p style="color:#16a34a;font-weight:bold;">
+    ⚡ Most users upgrade after seeing results
+    </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
+
+st.markdown("---") 
 
 # ==============================
 # PLAN

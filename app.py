@@ -204,7 +204,7 @@ if plan in ["basic", "premium"]:
 You are a TOP 1% recruiter and hiring strategist.
 
 IMPORTANT RULES:
-- Be clean, structured, and professional
+- Be detailed, clean, structured, and professional
 - DO NOT use tables
 - DO NOT assume or fabricate experience
 - Use clear headings and spacing
@@ -238,12 +238,12 @@ Most hired candidates score 80%+
 
 ---
 
-### 5. FULL ATS CV
+### 5. FULL DETAILED ATS CV REWRITE
 1. Rewrite this CV to be highly competitive.
-2. Make it results-driven with strong metrics - quantified, and impactful.
+2. Rewrite it to become results-driven with strong metrics - quantified, and impactful.
 3. Optimize for ATS and recruiter psychology & visibility.
 4. Suggest improvements for structure and keywords.
-5. Create a strong LinkedIn profile including:
+5. Create a strong detailed LinkedIn profile including:
    - LinkedIn Headline
    - LinkedIn About Section
    - Key Skills Section
@@ -266,7 +266,7 @@ JOB DESCRIPTION:
             else:
                 prompt = f"""
 Improve this CV professionally:
-- ATS optimized
+- ATS optimized and impactful
 - Strong achievements
 - Clean formatting
 

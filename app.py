@@ -264,7 +264,7 @@ CV:
 """
             else:
                 prompt = f"""
-You are an expert recruiter and strategist.
+You are a WORLD-CLASS recruiter and an expert strategist.
 
 IMPORTANT: RETURN ALL SECTIONS CLEARLY.
 

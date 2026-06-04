@@ -276,7 +276,7 @@ But visibility = opportunities.
 Top candidates show up DAILY on LinkedIn.
 """)
 
-        st.link_button("Start Growing x10 FASTER", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
+        st.link_button("Many have used this system to increase visibility — want it?", "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46")
 
         # ==============================
         # 📲 WHATSAPP

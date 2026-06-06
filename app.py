@@ -13,7 +13,7 @@ import urllib.parse
 
 st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
-st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
+st.title("🚀 AI That Matches and Rewrite Your CV to Any Job Description (ATS + Recruiter Approved)")
 
 st.markdown("""
 <style>
@@ -148,13 +148,16 @@ with col2:
     </p>
     <hr>
     <p>🔥 EVERYTHING in Basic PLUS:</p>
+    <p>✔ Extract key requirements from JOB DESCRIPTION</p>
+    <p>✔ Compare with CV and Identify gaps</p>
+    <p>✔ Rewrite CV to ALIGN with JD</p>
+    <p>✔ Inject keywords NATURALLY</p>
     <p>✔ LinkedIn Headline</p>
     <p>✔ LinkedIn About Section</p>
     <p>✔ Skills Optimization</p>
     <p>✔ Recruiter-Level Rewrite</p>
     <p>✔ Achievement Metrics</p>
     <p>✔ Cover Letter</p>
-    <p>✔ Job-tailored CV</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -350,3 +353,9 @@ Fix that today 👇
 
 else:
     st.error("❌ Complete payment first")
+    
+# ==============================
+# FOOTER
+# ==============================
+st.markdown("---")
+st.caption("🚀 Built for income + impact by Oghenchovwe AKPOJOTOR")

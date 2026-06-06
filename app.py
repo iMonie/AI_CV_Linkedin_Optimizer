@@ -148,8 +148,8 @@ with col2:
     </p>
     <hr>
     <p>🔥 EVERYTHING in Basic PLUS:</p>
-    <p>✔ Extract key requirements from JOB DESCRIPTION</p>
-    <p>✔ Compare with CV and Identify gaps</p>
+    <p>✔ Extraction of key requirements from JOB DESCRIPTION</p>
+    <p>✔ Comparison of CV with Identified gaps</p>
     <p>✔ Rewrite CV to ALIGN with JD</p>
     <p>✔ Inject keywords NATURALLY</p>
     <p>✔ LinkedIn Headline</p>

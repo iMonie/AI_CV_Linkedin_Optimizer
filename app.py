@@ -11,6 +11,8 @@ import urllib.parse
 # 🎨 UI DESIGN
 # ==============================
 
+st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
+
 st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
 
 st.markdown("""
@@ -103,7 +105,7 @@ st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired X10 faster.")
 st.markdown("---")
 
 # ==============================
-# 💳 PAYMENT (UPGRADED UI)
+# 💳 PAYMENT UI
 # ==============================
 st.markdown("## 💳 Choose Your Package")
 
@@ -162,7 +164,7 @@ with col2:
 
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
 
-st.markdown("---") 
+st.markdown("---")
 
 # ==============================
 # PLAN
@@ -191,13 +193,12 @@ if plan in ["basic", "premium"]:
         st.success("✅ Basic Plan Activated")
         st.warning("🚀 Upgrade to Premium for 10x better results")
         st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
-
     else:
-        st.success("**💎 Premium Activated**")
+        st.success("💎 Premium Activated")
 
     if cv and email:
 
-        if st.button("**🚀 Generate My CV**"):
+        if st.button("🚀 Generate My CV"):
 
             progress = st.progress(0)
             status = st.empty()
@@ -215,70 +216,22 @@ if plan in ["basic", "premium"]:
                 progress.progress(i + 1)
                 status.text(random.choice(steps))
 
-            if plan == "basic":
-                prompt = f""
-
             # ==============================
-            # 🧠 PROMPT LOGIC (FIXED)
+            # PROMPT LOGIC
             # ==============================
             if jd and jd.strip() != "":
                 prompt = f"""
 You are a TOP 1% recruiter and hiring strategist.
 
-IMPORTANT RULES:
-- Be detailed, clean, structured, and professional
-- DO NOT use tables
-- DO NOT assume or fabricate experience
-- Use clear headings and spacing
-
----
-
-### 1. MATCH ANALYSIS
 Most hired candidates score 80%+
 
-- Match Score (%)
-- 3–5 bullet reasons
-
----
-
-### 2. SKILL GAP ANALYSIS
-- Missing skills
-- What can be reframed
-- What to learn
-
----
-
-### 3. TOP 20 KEYWORDS
-- Clean bullet list
-- No repetition
-
----
-
-### 4. ACHIEVEMENT REWRITE
-- Use metrics if available
-- If missing → say "Add metric here"
-
----
-
-### 5. FULL ATS CV 
-1. Rewrite this CV to be detailed and highly competitive.
-2. Rewrite it to become results-driven with strong metrics - quantified, and impactful.
-3. Optimize for ATS and recruiter psychology & visibility.
-4. Format like a paid Jobscan or McKinsey-style report.
-5. Suggest improvements for structure and keywords.
-6. Create a strong detailed LinkedIn profile including:
-   - LinkedIn Headline
-   - LinkedIn About Section
-   - Key Skills Section
-   - Experience bullet improvements
-7. Position candidate as top 1%
-8. Job tailored CV
-9. Cover Letter
-
-
----
-
-### 6. FINAL TIPS
+1. Match Score (%)
+2. Skill gaps
+3. Top 20 keywords
+4. Achievement rewrite
+5. Full ATS CV
+6. LinkedIn profile
+7. Cover Letter
 
 CV:
 {cv}
@@ -289,7 +242,7 @@ JOB DESCRIPTION:
             else:
                 prompt = f"""
 Improve this CV professionally:
-- ATS optimized and impactful
+- ATS optimized
 - Strong achievements
 - Clean formatting
 
@@ -312,20 +265,26 @@ CV:
         # VIRAL HOOK
         # ==============================
         st.markdown("---")
-        st.markdown("## 🚀 Want Recruiters to FIND You?
-        I found a tool that:
-✔ Writes posts for you
-✔ Plans your entire week
-✔ Schedules everything automatically
-Basically… it removes excuses.
-If you’re serious about growing your brand 
-🚨 Don’t Stay Invisible
-Someone less skilled than you is winning…
-Because they show up DAILY.
-You don’t.
-Fix that today.
 
-Click below 👇 to start using the tool:")
+        st.markdown("""
+## 🚀 Want Recruiters to FIND You?
+
+I found a tool that:
+
+✔ Writes posts for you  
+✔ Plans your entire week  
+✔ Schedules everything automatically  
+
+Basically… it removes excuses.
+
+🚨 Don’t Stay Invisible  
+Someone less skilled than you is winning…  
+Because they show up DAILY.  
+
+You don’t.
+
+Fix that today 👇
+""")
 
         st.link_button(
             "Increase visibility now",

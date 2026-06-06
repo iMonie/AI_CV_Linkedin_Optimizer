@@ -227,20 +227,46 @@ CV:
 {cv}
 """
 
+            # ==============================
+            # 💎 PREMIUM LOGIC (YOUR EXACT VERSION)
+            # ==============================
             else:
-                if jd and jd.strip() != "":
+
+                if jd.strip() != "":
+
                     prompt = f"""
-You are a TOP 1% recruiter.
+You are a TOP recruiter + ATS system.
+
+IMPORTANT:
+You must FULLY MATCH the CV to the job description.
 
 Most hired candidates score 80%+
 
-1. Match Score (%)
-2. Skill gaps
-3. Top 20 keywords
-4. Achievement rewrite
-5. Full ATS CV
-6. LinkedIn profile
-7. Cover Letter
+STEP 1: Extract key requirements from JOB DESCRIPTION  
+STEP 2: Compare with CV  
+STEP 3: Identify gaps  
+STEP 4: Rewrite CV to ALIGN with JD  
+STEP 5: Inject keywords NATURALLY  
+STEP 6: Convert tasks into measurable achievements  
+STEP 7: Reorder CV for maximum recruiter impact  
+
+OUTPUT FORMAT:
+
+--- MATCH SCORE ---
+Give realistic % match (not inflated)
+
+--- SKILL GAPS ---
+List missing skills honestly
+
+--- TOP KEYWORDS ---
+Extract top 20 ATS keywords
+
+--- REWRITTEN CV (JOB-TARGETED) ---
+Rewrite the ENTIRE CV to match the job
+
+--- LINKEDIN HEADLINE ---
+--- LINKEDIN ABOUT ---
+--- COVER LETTER ---
 
 CV:
 {cv}
@@ -248,7 +274,9 @@ CV:
 JOB DESCRIPTION:
 {jd}
 """
+
                 else:
+
                     prompt = f"""
 You are a TOP recruiter.
 
@@ -270,16 +298,10 @@ CV:
 
             st.success("✅ Done")
 
-            # ==============================
-            # OUTPUT CONTROL
-            # ==============================
             if plan == "basic":
                 st.write(result)
-
                 st.warning("🔒 LinkedIn + Cover Letter locked in Premium")
-
                 st.link_button("Upgrade to Premium 🚀", "https://selar.co/m001q0082z")
-
             else:
                 st.write(result)
 
@@ -287,7 +309,7 @@ CV:
             send_email(email, result)
 
         # ==============================
-        # VIRAL HOOK
+        # VIRAL HOOK (UNCHANGED)
         # ==============================
         st.markdown("---")
 

@@ -202,6 +202,7 @@ if plan in ["basic", "premium"]:
             for i in range(100):
                 time.sleep(0.02)
                 progress.progress(i + 1)
+                status.text("Processing...")
 
             # ==============================
             # STRICT PROMPT CONTROL

@@ -155,10 +155,6 @@ with col2:
     <p>✔ Achievement Metrics</p>
     <p>✔ Cover Letter</p>
     <p>✔ Job-tailored CV</p>
-    <br>
-    <p style="color:#16a34a;font-weight:bold;">
-    ⚡ Most users upgrade after seeing results
-    </p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -191,7 +187,7 @@ if plan in ["basic", "premium"]:
 
     if plan == "basic":
         st.success("✅ Basic Plan Activated")
-        st.warning("🚀 Upgrade to Premium for 10x better results")
+        st.warning("🚀 Upgrade to Premium for full results")
         st.link_button("Upgrade Now", "https://selar.co/m001q0082z")
     else:
         st.success("💎 Premium Activated")
@@ -203,25 +199,37 @@ if plan in ["basic", "premium"]:
             progress = st.progress(0)
             status = st.empty()
 
-            steps = [
-                "🔍 Analyzing CV...",
-                "🧠 Applying recruiter logic...",
-                "⚡ Optimizing bullet points...",
-                "📈 Adding achievements...",
-                "🎯 Finalizing..."
-            ]
-
             for i in range(100):
                 time.sleep(0.02)
                 progress.progress(i + 1)
-                status.text(random.choice(steps))
 
             # ==============================
-            # PROMPT LOGIC
+            # STRICT PROMPT CONTROL
             # ==============================
-            if jd and jd.strip() != "":
+            if plan == "basic":
+
                 prompt = f"""
-You are a TOP 1% recruiter and hiring strategist.
+You are a professional CV optimizer.
+
+STRICT RULE:
+- ONLY optimize CV
+- DO NOT include LinkedIn
+- DO NOT include Cover Letter
+- DO NOT include extra sections
+
+OUTPUT:
+- Clean ATS CV
+- Improved bullet points
+- Better formatting
+
+CV:
+{cv}
+"""
+
+            else:
+                if jd and jd.strip() != "":
+                    prompt = f"""
+You are a TOP 1% recruiter.
 
 Most hired candidates score 80%+
 
@@ -239,12 +247,14 @@ CV:
 JOB DESCRIPTION:
 {jd}
 """
-            else:
-                prompt = f"""
-Improve this CV professionally:
-- ATS optimized
-- Strong achievements
-- Clean formatting
+                else:
+                    prompt = f"""
+You are a TOP recruiter.
+
+Provide:
+- Full ATS CV
+- LinkedIn profile
+- Cover Letter
 
 CV:
 {cv}
@@ -258,6 +268,20 @@ CV:
             result = response.choices[0].message.content
 
             st.success("✅ Done")
+
+            # ==============================
+            # OUTPUT CONTROL
+            # ==============================
+            if plan == "basic":
+                st.write(result)
+
+                st.warning("🔒 LinkedIn + Cover Letter locked in Premium")
+
+                st.link_button("Upgrade to Premium 🚀", "https://selar.co/m001q0082z")
+
+            else:
+                st.write(result)
+
             st.download_button("📥 Download", result)
             send_email(email, result)
 
@@ -269,21 +293,11 @@ CV:
         st.markdown("""
 ## 🚀 Want Recruiters to FIND You?
 
-I found a tool that:
-
-✔ Writes posts for you  
+✔ Writes posts  
 ✔ Plans your entire week  
-✔ Schedules everything automatically  
+✔ Schedules automatically  
 
-Basically… it removes excuses.
-
-🚨 Don’t Stay Invisible  
-Someone less skilled than you is winning…  
-Because they show up DAILY.  
-
-You don’t.
-
-Fix that today 👇
+Stop being invisible.
 """)
 
         st.link_button(
@@ -291,9 +305,6 @@ Fix that today 👇
             "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
         )
 
-        # ==============================
-        # WHATSAPP
-        # ==============================
         encoded_msg = urllib.parse.quote("Help me get hired fast")
 
         st.link_button(

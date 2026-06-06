@@ -293,11 +293,21 @@ CV:
         st.markdown("""
 ## 🚀 Want Recruiters to FIND You?
 
-✔ Writes posts  
-✔ Plans your entire week  
-✔ Schedules automatically  
+I found a tool that:
 
-Stop being invisible.
+✔ Writes posts for you  
+✔ Plans your entire week  
+✔ Schedules everything automatically  
+
+Basically… it removes excuses.
+
+🚨 Don’t Stay Invisible  
+Someone less skilled than you is winning…  
+Because they show up DAILY.  
+
+You don’t.
+
+Fix that today 👇
 """)
 
         st.link_button(

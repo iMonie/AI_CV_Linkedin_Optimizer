@@ -62,7 +62,8 @@ if plan in ["basic", "premium"]:
 
         if st.button("🚀 Generate My CV"):
 
-progress = st.progress(0)
+            # ✅ FIXED INDENTATION STARTS HERE
+            progress = st.progress(0)
             status = st.empty()
 
             steps = [
@@ -102,7 +103,7 @@ CV:
 """
 
             # ==============================
-            # 💎 PREMIUM LOGIC (FULL JD MATCH)
+            # 💎 PREMIUM LOGIC
             # ==============================
             else:
 
@@ -136,11 +137,7 @@ List missing skills honestly
 Extract top 20 ATS keywords
 
 --- REWRITTEN CV (JOB-TARGETED) ---
-Rewrite the ENTIRE CV to match the job:
-- Use keywords from JD
-- Improve achievements with metrics
-- Align experience with job needs
-- Keep it realistic (do NOT invent false roles)
+Rewrite the ENTIRE CV to match the job
 
 --- LINKEDIN HEADLINE ---
 --- LINKEDIN ABOUT ---
@@ -234,4 +231,3 @@ Fix that today 👇
 
 else:
     st.error("❌ Complete payment first")
-

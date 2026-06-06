@@ -248,7 +248,7 @@ Most hired candidates score 80%+
 STEP 1: Extract key requirements from JOB DESCRIPTION  
 STEP 2: Compare with CV  
 STEP 3: Identify gaps  
-STEP 4: Rewrite CV to ALIGN with JD  
+STEP 4: Rewrite CV to ALIGN with JD and make it clean detailed ATS CV and be impactful    
 STEP 5: Inject keywords NATURALLY  
 STEP 6: Convert tasks into measurable achievements  
 STEP 7: Reorder CV for maximum recruiter impact  

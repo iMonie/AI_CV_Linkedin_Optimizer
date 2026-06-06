@@ -312,7 +312,20 @@ CV:
         # VIRAL HOOK
         # ==============================
         st.markdown("---")
-        st.markdown("## 🚀 Want Recruiters to FIND You?")
+        st.markdown("## 🚀 Want Recruiters to FIND You?
+        I found a tool that:
+✔ Writes posts for you
+✔ Plans your entire week
+✔ Schedules everything automatically
+Basically… it removes excuses.
+If you’re serious about growing your brand 
+🚨 Don’t Stay Invisible
+Someone less skilled than you is winning…
+Because they show up DAILY.
+You don’t.
+Fix that today.
+
+Click below 👇 to start using the tool:")
 
         st.link_button(
             "Increase visibility now",

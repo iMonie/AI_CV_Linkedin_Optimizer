@@ -222,8 +222,8 @@ STRICT RULE:
 - DO NOT include extra sections
 
 OUTPUT:
-- Clean ATS CV
-- Improved bullet points
+- Rewrite clean detailed ATS CV and make it impactful
+- Improved bullet points 
 - Better formatting
 
 CV:

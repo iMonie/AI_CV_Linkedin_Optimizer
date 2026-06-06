@@ -62,7 +62,7 @@ if plan in ["basic", "premium"]:
 
         if st.button("🚀 Generate My CV"):
 
-            # ✅ FIXED INDENTATION STARTS HERE
+            # ✅ ONLY CHANGE: INDENTATION FIX
             progress = st.progress(0)
             status = st.empty()
 
@@ -103,7 +103,7 @@ CV:
 """
 
             # ==============================
-            # 💎 PREMIUM LOGIC
+            # 💎 PREMIUM LOGIC (FULL JD MATCH)
             # ==============================
             else:
 
@@ -190,7 +190,7 @@ CV:
             send_email(email, result)
 
         # ==============================
-        # VIRAL HOOK
+        # VIRAL HOOK (UNCHANGED ✅)
         # ==============================
         st.markdown("---")
 

@@ -2,3 +2,5 @@ streamlit
 openai
 reportlab
 python-dotenv
+python-docx==1.1.0
+lxml

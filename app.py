@@ -91,8 +91,8 @@ st.markdown(f"🔥 **{live_users} people are using this right now**")
 # ==============================
 # 🛒 POPUP
 # ==============================
-names = ["John", "David", "Sarah", "Chioma", "Michael"]
-cities = ["Lagos", "Abuja", "Port Harcourt"]
+names = ["John", "David", "Sarah", "Ben" "Esther" "Clara" "Victory" "Chioma", "Michael"]
+cities = ["Lagos", "Abuja", "Warri" "London" "Port Harcourt" "New York" "Cape Town"]
 
 st.success(f"🔥 {random.choice(names)} from {random.choice(cities)} just upgraded to Premium 💎")
 
@@ -144,7 +144,7 @@ with col2:
     <h3>💎 Premium</h3>
     <p style="font-size:20px;">
     <span style="text-decoration:line-through;color:gray;">₦10,000</span>
-    <strong style="color:#16a34a;"> ₦1,000 Today</strong>
+    <strong style="color:#16a34a;"> ₦2,500 Today</strong>
     </p>
     <hr>
     <p>🔥 EVERYTHING in Basic PLUS:</p>
@@ -158,6 +158,7 @@ with col2:
     <p>✔ Recruiter-Level Rewrite</p>
     <p>✔ Achievement Metrics</p>
     <p>✔ Cover Letter</p>
+    <p>✔ Continous 1 on 1 Mentorship on Whatsapp</p>
     </div>
     """, unsafe_allow_html=True)
 

@@ -301,7 +301,7 @@ else:
 # ==============================
         # VIRAL HOOK (UNCHANGED)
         # ==============================
-        st.markdown("---")
+    
 
         st.markdown("""
 ## 🚀 Want Recruiters to FIND You?

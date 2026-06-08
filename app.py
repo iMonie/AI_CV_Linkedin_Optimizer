@@ -15,7 +15,7 @@ from docx import Document
 st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
 st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
-st.write("🔥 Beat 99% of applicants. Get hired faster.")
+st.write("🔥 Beat 99% of applicants. Get PREMIUM. Get hired x10 faster.")
 
 # ==============================
 # 🔐 API
@@ -49,7 +49,7 @@ st.markdown(f"🔥 **{live_users} people are using this right now**")
 # ==============================
 # 🛒 POPUP
 # ==============================
-names = ["John", "David", "Sarah", "Ben" "Esther" "Clara" "Victory" "Chioma", "Michael"]
+names = ["John", "David", "Sarah", "Ben", "Esther", "Clara", "Victory", "Chioma", "Larry"]
 cities = ["Lagos", "Abuja", "Warri" , "London" , "Port Harcourt", "New York", "Cape Town"]
 
 st.success(f"🔥 {random.choice(names)} from {random.choice(cities)} just upgraded to Premium 💎")

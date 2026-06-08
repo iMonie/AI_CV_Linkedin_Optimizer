@@ -284,6 +284,10 @@ Fix that today 👇
 st.link_button(
     "Increase visibility now",
     "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
+
+
+
+    
 )
 
 encoded_msg = urllib.parse.quote("Help me get hired fast")

@@ -5,19 +5,17 @@ from email.mime.text import MIMEText
 import time
 import random
 import urllib.parse
-from datetime import datetime, timedelta
-
-# ✅ ADDED
-from docx import Document
-import io
 import re
+import io
+from docx import Document
 
 # ==============================
-# 🎨 UI DESIGN
+# 🎨 UI
 # ==============================
 st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
-st.title("🚀 AI That Matches and Rewrites Your CV to Any Job Description")
+st.title("🚀 AI CV + LinkedIn Optimizer")
+st.write("🔥 Beat 99% of applicants. Get hired faster.")
 
 # ==============================
 # 🔐 API
@@ -25,7 +23,7 @@ st.title("🚀 AI That Matches and Rewrites Your CV to Any Job Description")
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # ==============================
-# 📩 EMAIL FUNCTION
+# 📩 EMAIL
 # ==============================
 def send_email(to_email, content):
     try:
@@ -43,7 +41,7 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 🔥 SCORE FUNCTION (ADVANCED)
+# 📊 SCORE
 # ==============================
 def advanced_score(cv_text, jd_text):
     cv_words = set(re.findall(r"\w+", cv_text.lower()))
@@ -53,7 +51,7 @@ def advanced_score(cv_text, jd_text):
     return min(int((len(cv_words & jd_words) / len(jd_words)) * 100), 95)
 
 # ==============================
-# 📄 DOCX GENERATOR
+# 📄 DOCX
 # ==============================
 def generate_docx(content):
     doc = Document()
@@ -65,12 +63,74 @@ def generate_docx(content):
     return buffer
 
 # ==============================
+# 💳 PRICING UI (FIXED + INSERTED)
+# ==============================
+st.markdown("## 💳 Choose Your Package")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown("""
+    <div style="
+        background:white;
+        padding:25px;
+        border-radius:15px;
+        border:1px solid #e5e7eb;
+        box-shadow:0 5px 15px rgba(0,0,0,0.05);
+    ">
+    <h3>💼 Basic (Free)</h3>
+    <p>✔ ATS Optimized CV</p>
+    <p>✔ Better bullet points</p>
+    <p>✔ Clean formatting</p>
+    <br>
+    <p style="color:#6b7280;">Perfect for quick improvement</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.link_button("Start Free", "https://selar.co/11180kb0j4")
+
+with col2:
+    st.markdown("""
+    <div style="
+        background:white;
+        padding:25px;
+        border-radius:15px;
+        border:2px solid #2563eb;
+        box-shadow:0 0 30px rgba(37,99,235,0.35);
+        transform:scale(1.03);
+    ">
+    <h3>💎 Premium</h3>
+    <p style="font-size:20px;">
+    <span style="text-decoration:line-through;color:gray;">₦10,000</span>
+    <strong style="color:#16a34a;"> ₦2,500 Today</strong>
+    </p>
+    <hr>
+    <p>🔥 EVERYTHING in Basic PLUS:</p>
+    <p>✔ Extraction of key requirements from JOB DESCRIPTION</p>
+    <p>✔ Comparison of CV with Identified gaps</p>
+    <p>✔ Rewrite CV to ALIGN with JD</p>
+    <p>✔ Inject keywords NATURALLY</p>
+    <p>✔ LinkedIn Headline</p>
+    <p>✔ LinkedIn About Section</p>
+    <p>✔ Skills Optimization</p>
+    <p>✔ Recruiter-Level Rewrite</p>
+    <p>✔ Achievement Metrics</p>
+    <p>✔ Cover Letter</p>
+    <p>✔ Continous 1 on 1 Mentorship on Whatsapp</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
+
+st.markdown("---")
+
+# ==============================
 # INPUT
 # ==============================
 st.markdown("### 📄 Paste your CV")
 cv = st.text_area("", height=200)
 
-st.markdown("### 🧾 Paste Job Description (Optional)")
+st.markdown("### 🧾 Job Description (Optional)")
 jd = st.text_area("", height=150)
 
 st.markdown("### 📧 Email")
@@ -79,11 +139,10 @@ email = st.text_input("")
 # ==============================
 # PLAN
 # ==============================
-query_params = st.query_params
-plan = query_params.get("plan")
+plan = st.query_params.get("plan")
 
 # ==============================
-# 🚀 MAIN LOGIC
+# 🚀 LOGIC
 # ==============================
 if plan in ["basic", "premium"]:
 
@@ -96,36 +155,24 @@ if plan in ["basic", "premium"]:
 
         if st.button("🚀 Generate My CV"):
 
-            # LOADING
-            progress = st.progress(0)
             for i in range(100):
                 time.sleep(0.01)
-                progress.progress(i + 1)
+                st.progress(i + 1)
 
-            # =========================
-            # 💎 PREMIUM PIPELINE
-            # =========================
+            # PREMIUM
             if plan == "premium":
 
-                if jd.strip() != "":
+                if jd.strip():
                     score = advanced_score(cv, jd)
 
                     prompt = f"""
 You are a TOP recruiter + ATS system.
 
-Candidate current match score: {score}%
+Candidate current match: {score}%
 
-IMPORTANT:
-Push this candidate above 85%.
+Push to 85%+
 
-STEP 1: Extract key requirements  
-STEP 2: Compare with CV  
-STEP 3: Identify gaps  
-STEP 4: Rewrite CV aligned to JD  
-STEP 5: Inject keywords naturally  
-STEP 6: Add measurable achievements  
-
-OUTPUT:
+Return:
 - Match Score
 - Skill Gaps
 - Keywords
@@ -141,35 +188,24 @@ JD:
 """
                 else:
                     prompt = f"""
-You are a top recruiter.
-
-Generate:
-- ATS CV
-- LinkedIn
-- Cover Letter
+Generate ATS CV + LinkedIn + Cover Letter.
 
 CV:
 {cv}
 """
 
-            # =========================
-            # 🆓 BASIC PIPELINE
-            # =========================
+            # BASIC
             else:
                 prompt = f"""
-Improve this CV.
-
-- Fix bullet points
-- Make it ATS friendly
-- Improve clarity
+Improve this CV:
+- Better bullets
+- ATS friendly
 
 CV:
 {cv}
 """
 
-            # =========================
-            # STEP 1: GENERATION
-            # =========================
+            # FIRST PASS
             res = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}]
@@ -177,53 +213,34 @@ CV:
 
             first_output = res.choices[0].message.content
 
-            # =========================
-            # 🤖 AI REVIEW PASS (PREMIUM ONLY)
-            # =========================
+            # REVIEW PASS (PREMIUM ONLY)
             if plan == "premium":
-
                 review_prompt = f"""
-You are a senior recruiter reviewing a CV.
-
-Improve this output:
-- Fix weak bullet points
-- Add impact
-- Improve clarity
-- Strong recruiter tone
+Improve this CV to recruiter level.
 
 CONTENT:
 {first_output}
 """
-
                 review_res = client.chat.completions.create(
                     model="gpt-4o-mini",
                     messages=[{"role": "user", "content": review_prompt}]
                 )
-
                 final_output = review_res.choices[0].message.content
             else:
                 final_output = first_output
 
-            # =========================
-            # OUTPUT
-            # =========================
             st.success("✅ Done")
 
-            if plan == "basic":
-                st.write(first_output)
-                st.warning("🔒 Premium upgrade unlocks full rewrite")
-            else:
+            if plan == "premium":
                 st.write(final_output)
 
-                # DOCX DOWNLOAD
-                docx_file = generate_docx(final_output)
-                st.download_button(
-                    "📥 Download CV (DOCX)",
-                    docx_file,
-                    file_name="AI_CV.docx"
-                )
+                docx = generate_docx(final_output)
+                st.download_button("📥 Download CV", docx, "AI_CV.docx")
 
-            # EMAIL
+            else:
+                st.write(first_output)
+                st.warning("🔒 Upgrade to unlock full rewrite")
+
             send_email(email, final_output)
 
     else:

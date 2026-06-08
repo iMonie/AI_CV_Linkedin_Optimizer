@@ -297,3 +297,47 @@ CONTENT:
 
 else:
     st.error("❌ Complete payment first")
+    
+# ==============================
+        # VIRAL HOOK (UNCHANGED)
+        # ==============================
+        st.markdown("---")
+
+        st.markdown("""
+## 🚀 Want Recruiters to FIND You?
+
+I found a tool that:
+
+✔ Writes posts for you  
+✔ Plans your entire week  
+✔ Schedules everything automatically  
+
+Basically… it removes excuses.
+
+🚨 Don’t Stay Invisible  
+Someone less skilled than you is winning…  
+Because they show up DAILY.  
+
+You don’t.
+
+Fix that today 👇
+""")
+
+        st.link_button(
+            "Increase visibility now",
+            "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
+        )
+
+        encoded_msg = urllib.parse.quote("Help me get hired fast")
+
+        st.link_button(
+            "💬 WhatsApp",
+            f"https://wa.me/2348035341982?text={encoded_msg}"
+        )
+
+    
+# ==============================
+# FOOTER
+# ==============================
+st.markdown("---")
+st.caption("🚀 Built for income + impact by Oghenchovwe AKPOJOTOR")

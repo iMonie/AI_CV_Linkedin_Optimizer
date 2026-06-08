@@ -101,9 +101,19 @@ with col2:
     <h3>💎 Premium</h3>
     <p><strong style="color:#16a34a;">₦2,500 Today</strong></p>
     <hr>
-    <p>✔ JD Matching</p>
-    <p>✔ Full Rewrite</p>
-    <p>✔ LinkedIn + Cover Letter</p>
+    <p>🔥 EVERYTHING in Basic PLUS:</p>
+    <p>✔ Extraction of key requirements from JOB DESCRIPTION</p>
+    <p>✔ Comparison of CV with Identified gaps</p>
+    <p>✔ Rewrite CV to ALIGN with JD</p>
+    <p>✔ Inject keywords NATURALLY</p>
+    <p>✔ LinkedIn Headline</p>
+    <p>✔ LinkedIn About Section</p>
+    <p>✔ Skills Optimization</p>
+    <p>✔ Recruiter-Level Rewrite</p>
+    <p>✔ Achievement Metrics</p>
+    <p>✔ Cover Letter</p>
+    <p>✔ Continous 1 on 1 Mentorship on Whatsapp</p>
+
     </div>
     """, unsafe_allow_html=True)
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
@@ -156,18 +166,34 @@ You are a TOP recruiter + ATS system.
 
 Candidate current match: {score}%
 
-Improve to 85%+
+Push to 85%+
+
+
+IMPORTANT:
+You must FULLY MATCH the CV to the job description.
+
+STEP 1: Extract key requirements from JOB DESCRIPTION  
+STEP 2: Compare with CV  
+STEP 3: Identify gaps  
+STEP 4: Rewrite CV to ALIGN with JD and make it clean detailed ATS CV and be impactful    
+STEP 5: Inject keywords NATURALLY  
+STEP 6: Convert tasks into measurable achievements  
+STEP 7: Reorder CV for maximum recruiter impact  
 
 Return:
-- Match Score
-- Skill Gaps
+- Match Score and Give realistic % match (not inflated)
+- Skill Gaps (List missing skills honestly)
 - Keywords
 - Rewritten CV
 - LinkedIn
 - Cover Letter
 
+--- TOP KEYWORDS ---
+Extract top 20 ATS keywords
+
 CV:
 {cv}
+
 
 JD:
 {jd}
@@ -183,7 +209,7 @@ CV:
                 prompt = f"""
 Improve this CV:
 - Better bullets
-- ATS friendly
+- ATS friendly and impactful
 
 CV:
 {cv}
@@ -198,7 +224,13 @@ CV:
 
             if plan == "premium":
                 review_prompt = f"""
-Improve this CV to recruiter level.
+You are a senior recruiter reviewing a CV.
+
+Improve this output:
+- Fix weak bullet points
+- Add missing impact
+- Improve clarity
+- Ensure strong recruiter tone
 
 CONTENT:
 {first_output}

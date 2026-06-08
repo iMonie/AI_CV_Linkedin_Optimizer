@@ -339,5 +339,4 @@ Fix that today 👇
 # ==============================
 # FOOTER
 # ==============================
-st.markdown
 st.caption("🚀 Built for income + impact by Oghenchovwe AKPOJOTOR")

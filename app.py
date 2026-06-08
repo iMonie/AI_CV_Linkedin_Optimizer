@@ -289,6 +289,8 @@ st.markdown("---")
 st.markdown("""
 ## 🚀 Want Recruiters to FIND You?
 
+I found a tool that:
+
 ✔ Writes posts for you  
 ✔ Plans your entire week  
 ✔ Schedules everything automatically  

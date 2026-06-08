@@ -41,6 +41,21 @@ def send_email(to_email, content):
         return False
 
 # ==============================
+# 🔥 LIVE USERS COUNTER
+# ==============================
+live_users = random.randint(12, 47)
+st.markdown(f"🔥 **{live_users} people are using this right now**")
+
+# ==============================
+# 🛒 POPUP
+# ==============================
+names = ["John", "David", "Sarah", "Ben" "Esther" "Clara" "Victory" "Chioma", "Michael"]
+cities = ["Lagos", "Abuja", "Warri" "London" "Port Harcourt" "New York" "Cape Town"]
+
+st.success(f"🔥 {random.choice(names)} from {random.choice(cities)} just upgraded to Premium 💎")
+
+
+# ==============================
 # 📊 SCORE (MERGED FIX)
 # ==============================
 def advanced_score(cv, jd):
@@ -291,7 +306,7 @@ Fix that today 👇
 
 
 st.link_button(
-    "Increase visibility now",
+    "Click HERE to increase visibility NOW!",
     "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
 
 
@@ -302,7 +317,7 @@ st.link_button(
 encoded_msg = urllib.parse.quote("Help me get hired fast")
 
 st.link_button(
-    "💬 Chat with me on WhatsApp",
+    "💬 Chat on WhatsApp",
     f"https://wa.me/2348035341982?text={encoded_msg}"
 )
 

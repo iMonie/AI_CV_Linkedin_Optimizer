@@ -289,7 +289,7 @@ st.link_button(
 encoded_msg = urllib.parse.quote("Help me get hired fast")
 
 st.link_button(
-    "💬 WhatsApp",
+    "💬 Chat with me on WhatsApp",
     f"https://wa.me/2348035341982?text={encoded_msg}"
 )
 

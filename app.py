@@ -336,7 +336,10 @@ Fix that today 👇
         )
 
     
-# ==============================
-# FOOTER
-# ==============================
+st.markdown("---")
 st.caption("🚀 Built for income + impact by Oghenchovwe AKPOJOTOR")
+
+st.link_button(
+    "💬 Chat with me on WhatsApp",
+    "https://wa.me/2348035341982"
+)

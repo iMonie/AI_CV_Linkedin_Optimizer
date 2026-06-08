@@ -63,6 +63,32 @@ def generate_docx(content):
     return buffer
 
 # ==============================
+# ADVANCED SCORING
+# ==============================
+def advanced_score(cv, jd):
+    cv_words = set(cv.lower().split())
+    jd_words = set(jd.lower().split())
+
+    keyword_score = len(cv_words & jd_words) / max(len(jd_words), 1)
+
+    # heuristic scoring
+    skills_score = keyword_score
+    experience_score = 0.7 if "experience" in cv.lower() else 0.4
+    alignment_score = 0.6
+    clarity_score = 0.7
+
+    final = (
+        skills_score * 0.3 +
+        keyword_score * 0.25 +
+        experience_score * 0.25 +
+        alignment_score * 0.1 +
+        clarity_score * 0.1
+    ) * 100
+
+    return int(final)
+
+
+# ==============================
 # 💳 PRICING UI (FIXED + INSERTED)
 # ==============================
 st.markdown("## 💳 Choose Your Package")

@@ -335,4 +335,9 @@ Fix that today 👇
             f"https://wa.me/2348035341982?text={encoded_msg}"
         )
 
+# ==============================
+# FOOTER
+# ==============================
+st.markdown("---")
+st.caption("🚀 Built for income + impact by Oghenchovwe AKPOJOTOR")
     

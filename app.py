@@ -98,8 +98,12 @@ with col1:
 with col2:
     st.markdown("""
     <div style="background:white;padding:25px;border-radius:15px;border:2px solid #2563eb;">
+    
     <h3>💎 Premium</h3>
-    <p><strong style="color:#16a34a;">₦2,500 Today</strong></p>
+    <p style="font-size:20px;">
+    <span style="text-decoration:line-through;color:gray;">₦25,000</span>
+    <strong style="color:#16a34a;"> ₦2,500 Today</strong>
+    </p>
     <hr>
     <p>🔥 EVERYTHING in Basic PLUS:</p>
     <p>✔ Extraction of key requirements from JOB DESCRIPTION</p>
@@ -178,7 +182,7 @@ STEP 3: Identify gaps
 STEP 4: Rewrite CV to ALIGN with JD and make it clean detailed ATS CV and be impactful    
 STEP 5: Inject keywords NATURALLY  
 STEP 6: Convert tasks into measurable achievements  
-STEP 7: Reorder CV for maximum recruiter impact  
+STEP 7: Reorder CV for maximum recruiter impact + ATS system 
 
 Return:
 - Match Score and Give realistic % match (not inflated)
@@ -270,16 +274,21 @@ st.markdown("---")
 st.markdown("""
 ## 🚀 Want Recruiters to FIND You?
 
-I found a tool that:
-
 ✔ Writes posts for you  
 ✔ Plans your entire week  
 ✔ Schedules everything automatically  
 
-🚨 Someone less skilled is winning… because they show up DAILY.
+Basically… it removes excuses.
+
+🚨 Don’t Stay Invisible  
+Someone less skilled than you is winning…  
+Because they show up DAILY.  
+
+You don’t.
 
 Fix that today 👇
 """)
+
 
 st.link_button(
     "Increase visibility now",

@@ -41,37 +41,14 @@ def send_email(to_email, content):
         return False
 
 # ==============================
-# 📊 SCORE
-# ==============================
-def advanced_score(cv_text, jd_text):
-    cv_words = set(re.findall(r"\w+", cv_text.lower()))
-    jd_words = set(re.findall(r"\w+", jd_text.lower()))
-    if not jd_words:
-        return 0
-    return min(int((len(cv_words & jd_words) / len(jd_words)) * 100), 95)
-
-# ==============================
-# 📄 DOCX
-# ==============================
-def generate_docx(content):
-    doc = Document()
-    for line in content.split("\n"):
-        doc.add_paragraph(line)
-    buffer = io.BytesIO()
-    doc.save(buffer)
-    buffer.seek(0)
-    return buffer
-
-# ==============================
-# ADVANCED SCORING
+# 📊 SCORE (MERGED FIX)
 # ==============================
 def advanced_score(cv, jd):
-    cv_words = set(cv.lower().split())
-    jd_words = set(jd.lower().split())
+    cv_words = set(re.findall(r"\w+", cv.lower()))
+    jd_words = set(re.findall(r"\w+", jd.lower()))
 
     keyword_score = len(cv_words & jd_words) / max(len(jd_words), 1)
 
-    # heuristic scoring
     skills_score = keyword_score
     experience_score = 0.7 if "experience" in cv.lower() else 0.4
     alignment_score = 0.6
@@ -87,9 +64,20 @@ def advanced_score(cv, jd):
 
     return int(final)
 
+# ==============================
+# 📄 DOCX
+# ==============================
+def generate_docx(content):
+    doc = Document()
+    for line in content.split("\n"):
+        doc.add_paragraph(line)
+    buffer = io.BytesIO()
+    doc.save(buffer)
+    buffer.seek(0)
+    return buffer
 
 # ==============================
-# 💳 PRICING UI (FIXED + INSERTED)
+# 💳 PRICING UI
 # ==============================
 st.markdown("## 💳 Choose Your Package")
 
@@ -97,55 +85,27 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown("""
-    <div style="
-        background:white;
-        padding:25px;
-        border-radius:15px;
-        border:1px solid #e5e7eb;
-        box-shadow:0 5px 15px rgba(0,0,0,0.05);
-    ">
+    <div style="background:white;padding:25px;border-radius:15px;border:1px solid #e5e7eb;">
     <h3>💼 Basic (Free)</h3>
     <p>✔ ATS Optimized CV</p>
     <p>✔ Better bullet points</p>
     <p>✔ Clean formatting</p>
-    <br>
     <p style="color:#6b7280;">Perfect for quick improvement</p>
     </div>
     """, unsafe_allow_html=True)
-
     st.link_button("Start Free", "https://selar.co/11180kb0j4")
 
 with col2:
     st.markdown("""
-    <div style="
-        background:white;
-        padding:25px;
-        border-radius:15px;
-        border:2px solid #2563eb;
-        box-shadow:0 0 30px rgba(37,99,235,0.35);
-        transform:scale(1.03);
-    ">
+    <div style="background:white;padding:25px;border-radius:15px;border:2px solid #2563eb;">
     <h3>💎 Premium</h3>
-    <p style="font-size:20px;">
-    <span style="text-decoration:line-through;color:gray;">₦10,000</span>
-    <strong style="color:#16a34a;"> ₦2,500 Today</strong>
-    </p>
+    <p><strong style="color:#16a34a;">₦2,500 Today</strong></p>
     <hr>
-    <p>🔥 EVERYTHING in Basic PLUS:</p>
-    <p>✔ Extraction of key requirements from JOB DESCRIPTION</p>
-    <p>✔ Comparison of CV with Identified gaps</p>
-    <p>✔ Rewrite CV to ALIGN with JD</p>
-    <p>✔ Inject keywords NATURALLY</p>
-    <p>✔ LinkedIn Headline</p>
-    <p>✔ LinkedIn About Section</p>
-    <p>✔ Skills Optimization</p>
-    <p>✔ Recruiter-Level Rewrite</p>
-    <p>✔ Achievement Metrics</p>
-    <p>✔ Cover Letter</p>
-    <p>✔ Continous 1 on 1 Mentorship on Whatsapp</p>
+    <p>✔ JD Matching</p>
+    <p>✔ Full Rewrite</p>
+    <p>✔ LinkedIn + Cover Letter</p>
     </div>
     """, unsafe_allow_html=True)
-
     st.link_button("Upgrade Now 🚀", "https://selar.co/m001q0082z")
 
 st.markdown("---")
@@ -181,11 +141,11 @@ if plan in ["basic", "premium"]:
 
         if st.button("🚀 Generate My CV"):
 
+            progress = st.progress(0)
             for i in range(100):
                 time.sleep(0.01)
-                st.progress(i + 1)
+                progress.progress(i + 1)
 
-            # PREMIUM
             if plan == "premium":
 
                 if jd.strip():
@@ -196,30 +156,15 @@ You are a TOP recruiter + ATS system.
 
 Candidate current match: {score}%
 
-Push to 85%+
-
-
-IMPORTANT:
-You must FULLY MATCH the CV to the job description.
-
-STEP 1: Extract key requirements from JOB DESCRIPTION  
-STEP 2: Compare with CV  
-STEP 3: Identify gaps  
-STEP 4: Rewrite CV to ALIGN with JD and make it clean detailed ATS CV and be impactful    
-STEP 5: Inject keywords NATURALLY  
-STEP 6: Convert tasks into measurable achievements  
-STEP 7: Reorder CV for maximum recruiter impact  
+Improve to 85%+
 
 Return:
-- Match Score and Give realistic % match (not inflated)
-- Skill Gaps (List missing skills honestly)
+- Match Score
+- Skill Gaps
 - Keywords
 - Rewritten CV
 - LinkedIn
 - Cover Letter
-
---- TOP KEYWORDS ---
-Extract top 20 ATS keywords
 
 CV:
 {cv}
@@ -234,19 +179,16 @@ Generate ATS CV + LinkedIn + Cover Letter.
 CV:
 {cv}
 """
-
-            # BASIC
             else:
                 prompt = f"""
 Improve this CV:
 - Better bullets
-- ATS friendly and make impactful
+- ATS friendly
 
 CV:
 {cv}
 """
 
-            # FIRST PASS
             res = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}]
@@ -254,18 +196,9 @@ CV:
 
             first_output = res.choices[0].message.content
 
-            # REVIEW PASS (PREMIUM ONLY)
             if plan == "premium":
                 review_prompt = f"""
-                
-You are a senior recruiter reviewing a CV.
-
-Improve this output:
-- Fix weak bullet points
-- Add missing impact
-- Improve clarity
-- Ensure strong recruiter tone
-
+Improve this CV to recruiter level.
 
 CONTENT:
 {first_output}
@@ -285,7 +218,6 @@ CONTENT:
 
                 docx = generate_docx(final_output)
                 st.download_button("📥 Download CV", docx, "AI_CV.docx")
-
             else:
                 st.write(first_output)
                 st.warning("🔒 Upgrade to unlock full rewrite")
@@ -297,45 +229,38 @@ CONTENT:
 
 else:
     st.error("❌ Complete payment first")
-    
-# ==============================
-        # VIRAL HOOK (UNCHANGED)
-        # ==============================
-    
-## 🚀 Want Recruiters to FIND You?
 
-I found a tool that:
+# ==============================
+# VIRAL HOOK (FIXED)
+# ==============================
+st.markdown("---")
+
+st.markdown("""
+## 🚀 Want Recruiters to FIND You?
 
 ✔ Writes posts for you  
 ✔ Plans your entire week  
 ✔ Schedules everything automatically  
 
-Basically… it removes excuses.
-
-🚨 Don’t Stay Invisible  
-Someone less skilled than you is winning…  
-Because they show up DAILY.  
-
-You don’t.
+🚨 Someone less skilled is winning… because they show up DAILY.
 
 Fix that today 👇
 """)
 
-        st.link_button(
-            "Increase visibility now",
-            "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
-        )
+st.link_button(
+    "Increase visibility now",
+    "https://socials.scaleplant.com/en/?c=AKPOJOTOWY46"
+)
 
-        encoded_msg = urllib.parse.quote("Help me get hired fast")
+encoded_msg = urllib.parse.quote("Help me get hired fast")
 
-        st.link_button(
-            "💬 WhatsApp",
-            f"https://wa.me/2348035341982?text={encoded_msg}"
-        )
+st.link_button(
+    "💬 WhatsApp",
+    f"https://wa.me/2348035341982?text={encoded_msg}"
+)
 
 # ==============================
 # FOOTER
 # ==============================
 st.markdown("---")
 st.caption("🚀 Built for income + impact by Oghenchovwe AKPOJOTOR")
-    

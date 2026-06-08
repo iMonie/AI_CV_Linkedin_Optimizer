@@ -14,7 +14,7 @@ from docx import Document
 # ==============================
 st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
-st.title("🚀 AI CV + LinkedIn Optimizer")
+st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)"
 st.write("🔥 Beat 99% of applicants. Get hired faster.")
 
 # ==============================
@@ -172,6 +172,8 @@ Candidate current match: {score}%
 
 Push to 85%+
 
+Match CV to job description.
+
 Return:
 - Match Score
 - Skill Gaps
@@ -216,7 +218,15 @@ CV:
             # REVIEW PASS (PREMIUM ONLY)
             if plan == "premium":
                 review_prompt = f"""
-Improve this CV to recruiter level.
+                
+You are a senior recruiter reviewing a CV.
+
+Improve this output:
+- Fix weak bullet points
+- Add missing impact
+- Improve clarity
+- Ensure strong recruiter tone
+
 
 CONTENT:
 {first_output}

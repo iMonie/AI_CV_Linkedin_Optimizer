@@ -198,15 +198,28 @@ Candidate current match: {score}%
 
 Push to 85%+
 
-Match CV to job description.
+
+IMPORTANT:
+You must FULLY MATCH the CV to the job description.
+
+STEP 1: Extract key requirements from JOB DESCRIPTION  
+STEP 2: Compare with CV  
+STEP 3: Identify gaps  
+STEP 4: Rewrite CV to ALIGN with JD and make it clean detailed ATS CV and be impactful    
+STEP 5: Inject keywords NATURALLY  
+STEP 6: Convert tasks into measurable achievements  
+STEP 7: Reorder CV for maximum recruiter impact  
 
 Return:
-- Match Score
-- Skill Gaps
+- Match Score and Give realistic % match (not inflated)
+- Skill Gaps (List missing skills honestly)
 - Keywords
 - Rewritten CV
 - LinkedIn
 - Cover Letter
+
+--- TOP KEYWORDS ---
+Extract top 20 ATS keywords
 
 CV:
 {cv}
@@ -227,7 +240,7 @@ CV:
                 prompt = f"""
 Improve this CV:
 - Better bullets
-- ATS friendly
+- ATS friendly and make impactful
 
 CV:
 {cv}

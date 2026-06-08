@@ -14,7 +14,7 @@ from docx import Document
 # ==============================
 st.set_page_config(page_title="AI CV Optimizer", page_icon="🚀")
 
-st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)"
+st.title("🚀 AI That Matches Your CV to Any Job Description (ATS + Recruiter Approved)")
 st.write("🔥 Beat 99% of applicants. Get hired faster.")
 
 # ==============================

@@ -181,12 +181,16 @@ if plan in ["basic", "premium"]:
                     score = advanced_score(cv, jd)
 
                     prompt = f"""
-You are a TOP recruiter + ATS system.
+You are a TOP recruiter/strategist + ATS system.
+
+1. Rewrite this CV to be highly competitive.
+2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+3. Optimize for ATS and recruiter psychology & visibility.
+4. Suggest improvements for structure and keywords.
 
 Candidate current match: {score}%
 
 Push to 85%+
-
 
 IMPORTANT:
 You must FULLY MATCH the CV to the job description.

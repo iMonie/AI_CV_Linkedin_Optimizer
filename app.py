@@ -219,7 +219,23 @@ JD:
 """
                 else:
                     prompt = f"""
-Generate ATS CV + LinkedIn + Cover Letter.
+You are an expert recruiter and strategist.
+=== FULL CV REWRITE ===
+1. Rewrite this CV to be highly competitive.
+2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+3. Optimize for ATS and recruiter psychology & visibility.
+4. Suggest improvements for structure and keywords.
+
+=== LINKEDIN PROFILE ===
+- LinkedIn Headline
+- LinkedIn About Section
+- Key Skills Section
+- Experience bullet improvements
+
+=== POSITIONING ===
+5. Position candidate as top 1%
+6. Add strong achievements
+
 
 CV:
 {cv}

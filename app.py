@@ -259,9 +259,13 @@ CV:
 
             if plan == "premium":
                 review_prompt = f"""
-You are a senior recruiter reviewing a CV.
+You are a senior recruiter and strategist reviewing a CV.
 
 Improve this output:
+1. Rewrite this CV to be highly competitive.
+2. Rewrite it to be results-driven with strong metrics - quantified, and impactful.
+3. Optimize for ATS and recruiter psychology & visibility.
+4. Suggest improvements for structure and keywords
 - Fix weak bullet points
 - Add missing impact
 - Improve clarity
